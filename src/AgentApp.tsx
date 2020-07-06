@@ -11,12 +11,19 @@ declare global {
   }
 }
 
+interface AgentStatus {
+  inWrapUpTime: boolean;
+  wrapUpTimeLeft: number;
+}
+
 const loadScript = () => {
   const script = document.createElement('script');
   script.src =
     'https://sandbox.snapcall.io/snap/snapcalljs/snapcalljs-development.js';
   document.body.appendChild(script);
 };
+
+let wrapUpTimeLeftInterval: NodeJS.Timeout | null = null;
 
 const AgentApp = ({
   apiKey,
@@ -33,6 +40,20 @@ const AgentApp = ({
     callID: '',
   });
   const [callTimer, setCallTimer] = React.useState(0);
+  const [wrapUpTimeLeft, setWrapUpTimeLeft] = React.useState(0);
+
+  const updateWrapUpTimeLeft = () => setWrapUpTimeLeft(current => current - 1);
+
+  const checkAgentStatus = () => {
+    window.snapcallAPI.getAgentStatus((err: string, agent: AgentStatus) => {
+      if (err) console.error(err);
+      if (agent?.inWrapUpTime) {
+        const wrapUpTimeLeftInSeconds = Math.floor(agent.wrapUpTimeLeft / 1000);
+        setWrapUpTimeLeft(wrapUpTimeLeftInSeconds);
+      }
+      setView('waiting');
+    });
+  };
 
   const onInit = () => {
     window.snapcallAPI.setApiCredentials(apiKey, 'deprecated');
@@ -66,7 +87,8 @@ const AgentApp = ({
   };
 
   const onCallEnd = () => {
-    setView('waiting');
+    setView('loading');
+    checkAgentStatus();
   };
 
   React.useEffect(() => {
@@ -105,22 +127,43 @@ const AgentApp = ({
   }, []);
 
   React.useEffect(() => {
-    if (agentID) setView('waiting');
+    if (agentID) checkAgentStatus();
   }, [agentID]);
+
+  React.useEffect(() => {
+    if (wrapUpTimeLeft > 0 && !wrapUpTimeLeftInterval) {
+      wrapUpTimeLeftInterval = setInterval(updateWrapUpTimeLeft, 1000);
+    } else if (wrapUpTimeLeft <= 0) {
+      if (wrapUpTimeLeftInterval) clearInterval(wrapUpTimeLeftInterval);
+      wrapUpTimeLeftInterval = null;
+    }
+  }, [wrapUpTimeLeft]);
 
   if (view === 'loading') return <p>Loading..</p>;
   if (view === 'waiting') {
     return (
       <WaitingView
-        resetWrapUpTime={window.snapcallAPI.resetWrapUpTime}
-        wrapUpTimeLeft={0}
+        resetWrapUpTime={() => {
+          setView('loading');
+          window.snapcallAPI.resetWrapUpTime((err: string, success: boolean) => {
+            if (err) console.error(err);
+            if (success) {
+              setWrapUpTimeLeft(0);
+              setView('waiting');
+            }
+          });
+        }}
+        wrapUpTimeLeft={wrapUpTimeLeft}
       />
     );
   }
   if (view === 'ringing') {
     return (
       <RingingView
-        answer={ringingData.answer}
+        answer={() => {
+          setView('loading');
+          ringingData.answer();
+        }}
         decline={window.snapcallAPI.endCall}
         callID={ringingData.callID}
       />
