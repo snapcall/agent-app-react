@@ -1,6 +1,7 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
 import { AgentAppProps, RingingViewProps } from './types';
+import defaultLoadingView from './views/loading';
 import defaultWaitingView from './views/waiting';
 import defaultRingingView from './views/ringing';
 import defaultInCallView from './views/inCall';
@@ -23,11 +24,12 @@ const loadScript = () => {
   document.body.appendChild(script);
 };
 
-let wrapUpTimeLeftInterval: NodeJS.Timeout | null = null;
+let wrapUpTimeLeftInterval: number | null = null;
 
 const AgentApp = ({
   apiKey,
   agentEmail,
+  loadingView: LoadingView,
   waitingView: WaitingView,
   ringingView: RingingView,
   inCallView: InCallView,
@@ -139,7 +141,7 @@ const AgentApp = ({
     }
   }, [wrapUpTimeLeft]);
 
-  if (view === 'loading') return <p>Loading..</p>;
+  if (view === 'loading') return <LoadingView />;
   if (view === 'waiting') {
     return (
       <WaitingView
@@ -182,6 +184,7 @@ const AgentApp = ({
 };
 
 AgentApp.defaultProps = {
+  loadingView: defaultLoadingView,
   waitingView: defaultWaitingView,
   ringingView: defaultRingingView,
   inCallView: defaultInCallView,
@@ -190,6 +193,7 @@ AgentApp.defaultProps = {
 AgentApp.propTypes = {
   apiKey: PropTypes.string.isRequired,
   agentEmail: PropTypes.string.isRequired,
+  loadingView: PropTypes.func,
   waitingView: PropTypes.func,
   ringingView: PropTypes.func,
   inCallView: PropTypes.func,

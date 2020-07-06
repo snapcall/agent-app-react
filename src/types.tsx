@@ -1,6 +1,7 @@
 export interface AgentAppProps {
   apiKey: string;
   agentEmail: string;
+  loadingView: React.ComponentType;
   waitingView: React.ComponentType<WaitingProps>;
   ringingView: React.ComponentType<RingingViewProps>;
   inCallView: React.ComponentType<InCallViewProps>;
