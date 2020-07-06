@@ -3,6 +3,8 @@ export interface AgentAppProps {
   agentEmail: string;
   onDisconnect?: () => void;
   onReconnect?: () => void;
+  onClientLostConnection?: () => void;
+  onClientWeakNetwork?: () => void;
   loadingView: React.ComponentType;
   waitingView: React.ComponentType<WaitingProps>;
   ringingView: React.ComponentType<RingingViewProps>;

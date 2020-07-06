@@ -31,6 +31,8 @@ const AgentApp = ({
   agentEmail,
   onDisconnect,
   onReconnect,
+  onClientLostConnection,
+  onClientWeakNetwork,
   loadingView: LoadingView,
   waitingView: WaitingView,
   ringingView: RingingView,
@@ -58,6 +60,28 @@ const AgentApp = ({
       setView('waiting');
     });
   };
+
+const clientNetworkCheck = (event: CustomEvent) => {
+  const { secsSinceMedia, deadAudio, from, rtt } = event.detail.data;
+  const shouldNotify = secsSinceMedia % 5 === 0;
+  if (deadAudio && (shouldNotify || secsSinceMedia === 1)) {
+    /**
+     * Case no.1: deadAudio is sent when no audio packets are received
+     * Then we can assume the connection has been lost.
+     */
+    if (onClientLostConnection) onClientLostConnection();
+  } else if (rtt || from) {
+    /**
+     * Case no.2: handles bad network quality from the customer side.
+     * I tried with several use cases
+     *  - Very bad connection:
+     *    We only received the rtt value which usually is above 1000
+     *  - 3G and Edge:
+     *    We received this object: { "from": { lossRate: 0.5 }, "rtt": 1000 }
+     */
+    if (onClientWeakNetwork) onClientWeakNetwork();
+  }
+};
 
   const onDisconnectEvent = () => {
     if (onDisconnect) onDisconnect();
@@ -121,6 +145,7 @@ const AgentApp = ({
     window.addEventListener('snapcallEvent_callEnd', onCallEnd);
     window.addEventListener('snapcallEvent_callDisconnect', onDisconnectEvent);
     window.addEventListener('snapcallEvent_callReconnect', onReconnectEvent);
+    window.addEventListener('snapcallEvent_receiveInfo', clientNetworkCheck as EventListener);
     return () => {
       window.removeEventListener('snapcallEvent_init', onInit);
       window.removeEventListener(
@@ -139,6 +164,7 @@ const AgentApp = ({
       window.removeEventListener('snapcallEvent_callEnd', onCallEnd);
       window.removeEventListener('snapcallEvent_callDisconnect', onDisconnectEvent);
       window.removeEventListener('snapcallEvent_callReconnect', onReconnectEvent);
+      window.removeEventListener('snapcallEvent_receiveInfo', clientNetworkCheck as EventListener);
     };
   }, []);
 
@@ -200,6 +226,8 @@ const AgentApp = ({
 AgentApp.defaultProps = {
   onDisconnect: null,
   onReconnect: null,
+  onClientLostConnection: null,
+  onClientWeakNetwork: null,
   loadingView: defaultLoadingView,
   waitingView: defaultWaitingView,
   ringingView: defaultRingingView,
@@ -211,6 +239,8 @@ AgentApp.propTypes = {
   agentEmail: PropTypes.string.isRequired,
   onDisconnect: PropTypes.func,
   onReconnect: PropTypes.func,
+  onClientLostConnection: PropTypes.func,
+  onClientWeakNetwork: PropTypes.func,
   loadingView: PropTypes.func,
   waitingView: PropTypes.func,
   ringingView: PropTypes.func,
