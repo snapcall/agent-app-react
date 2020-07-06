@@ -1,13 +1,16 @@
 import * as React from 'react';
 import { RingingViewProps } from '../types';
+import { Container, ActionButton } from './style';
 
 const Ringing = ({ answer, decline }: RingingViewProps) => {
   return (
-    <div>
+    <Container>
       A call is coming! (play music)
-      <button onClick={answer}>Answer</button>
-      <button onClick={decline}>Decline</button>
-    </div>
+      <div>
+        <ActionButton onClick={answer}>Answer</ActionButton>
+        <ActionButton onClick={decline}>Decline</ActionButton>
+      </div>
+    </Container>
   );
 };
 

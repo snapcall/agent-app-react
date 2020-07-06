@@ -1,5 +1,7 @@
 import * as React from 'react';
 import { InCallViewProps } from '../types';
+import secondsToTime from '../helpers/secondsToTime';
+import { Container, ActionButton } from './style';
 
 const InCall = ({ hangUp, toggleHold, timer }: InCallViewProps) => {
   const [isOnHold, setIsOnHold] = React.useState(false);
@@ -8,11 +10,13 @@ const InCall = ({ hangUp, toggleHold, timer }: InCallViewProps) => {
     setIsOnHold(current => !current);
   };
   return (
-    <div>
-      In call ({timer})
-      <button onClick={onHoldClick}>{isOnHold ? 'Resume' : 'Hold'}</button>
-      <button onClick={hangUp}>Hang up</button>
-    </div>
+    <Container>
+      In call ({secondsToTime(timer)})
+      <div>
+        <ActionButton onClick={onHoldClick}>{isOnHold ? 'Resume' : 'Hold'}</ActionButton>
+        <ActionButton onClick={hangUp}>Hang up</ActionButton>
+      </div>
+    </Container>
   );
 };
 
