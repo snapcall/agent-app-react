@@ -1,6 +1,8 @@
 export interface AgentAppProps {
   apiKey: string;
   agentEmail: string;
+  onDisconnect?: () => void;
+  onReconnect?: () => void;
   loadingView: React.ComponentType;
   waitingView: React.ComponentType<WaitingProps>;
   ringingView: React.ComponentType<RingingViewProps>;

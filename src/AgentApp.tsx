@@ -29,6 +29,8 @@ let wrapUpTimeLeftInterval: number | null = null;
 const AgentApp = ({
   apiKey,
   agentEmail,
+  onDisconnect,
+  onReconnect,
   loadingView: LoadingView,
   waitingView: WaitingView,
   ringingView: RingingView,
@@ -55,6 +57,14 @@ const AgentApp = ({
       }
       setView('waiting');
     });
+  };
+
+  const onDisconnectEvent = () => {
+    if (onDisconnect) onDisconnect();
+  };
+
+  const onReconnectEvent = () => {
+    if (onReconnect) onReconnect();
   };
 
   const onInit = () => {
@@ -109,6 +119,8 @@ const AgentApp = ({
       onCallCurrentTimer as EventListener
     );
     window.addEventListener('snapcallEvent_callEnd', onCallEnd);
+    window.addEventListener('snapcallEvent_callDisconnect', onDisconnectEvent);
+    window.addEventListener('snapcallEvent_callReconnect', onReconnectEvent);
     return () => {
       window.removeEventListener('snapcallEvent_init', onInit);
       window.removeEventListener(
@@ -125,6 +137,8 @@ const AgentApp = ({
         onCallCurrentTimer as EventListener
       );
       window.removeEventListener('snapcallEvent_callEnd', onCallEnd);
+      window.removeEventListener('snapcallEvent_callDisconnect', onDisconnectEvent);
+      window.removeEventListener('snapcallEvent_callReconnect', onReconnectEvent);
     };
   }, []);
 
@@ -184,6 +198,8 @@ const AgentApp = ({
 };
 
 AgentApp.defaultProps = {
+  onDisconnect: null,
+  onReconnect: null,
   loadingView: defaultLoadingView,
   waitingView: defaultWaitingView,
   ringingView: defaultRingingView,
@@ -193,6 +209,8 @@ AgentApp.defaultProps = {
 AgentApp.propTypes = {
   apiKey: PropTypes.string.isRequired,
   agentEmail: PropTypes.string.isRequired,
+  onDisconnect: PropTypes.func,
+  onReconnect: PropTypes.func,
   loadingView: PropTypes.func,
   waitingView: PropTypes.func,
   ringingView: PropTypes.func,
