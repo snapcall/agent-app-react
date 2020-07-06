@@ -5,6 +5,7 @@ import defaultLoadingView from './views/loading';
 import defaultWaitingView from './views/waiting';
 import defaultRingingView from './views/ringing';
 import defaultInCallView from './views/inCall';
+import { checkMicrophoneLevel, endMicrophoneLevelCheck } from './helpers/microphoneLevelCheck';
 
 declare global {
   interface Window {
@@ -33,6 +34,8 @@ const AgentApp = ({
   onReconnect,
   onClientLostConnection,
   onClientWeakNetwork,
+  onAgentMicrophoneDown,
+  onAgentMicrophoneUp,
   loadingView: LoadingView,
   waitingView: WaitingView,
   ringingView: RingingView,
@@ -115,6 +118,10 @@ const clientNetworkCheck = (event: CustomEvent) => {
 
   const onAnswer = () => {
     setView('inCall');
+    checkMicrophoneLevel({
+      onMicrophoneDown: onAgentMicrophoneDown,
+      onMicrophoneUp: onAgentMicrophoneUp,
+    });
   };
 
   const onCallCurrentTimer = (event: CustomEvent) => {
@@ -125,6 +132,7 @@ const clientNetworkCheck = (event: CustomEvent) => {
   const onCallEnd = () => {
     setView('loading');
     checkAgentStatus();
+    endMicrophoneLevelCheck();
   };
 
   React.useEffect(() => {
@@ -228,6 +236,8 @@ AgentApp.defaultProps = {
   onReconnect: null,
   onClientLostConnection: null,
   onClientWeakNetwork: null,
+  onAgentMicrophoneDown: null,
+  onAgentMicrophoneUp: null,
   loadingView: defaultLoadingView,
   waitingView: defaultWaitingView,
   ringingView: defaultRingingView,
@@ -241,6 +251,8 @@ AgentApp.propTypes = {
   onReconnect: PropTypes.func,
   onClientLostConnection: PropTypes.func,
   onClientWeakNetwork: PropTypes.func,
+  onAgentMicrophoneDown: PropTypes.func,
+  onAgentMicrophoneUp: PropTypes.func,
   loadingView: PropTypes.func,
   waitingView: PropTypes.func,
   ringingView: PropTypes.func,

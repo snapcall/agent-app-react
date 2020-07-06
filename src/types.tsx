@@ -5,6 +5,8 @@ export interface AgentAppProps {
   onReconnect?: () => void;
   onClientLostConnection?: () => void;
   onClientWeakNetwork?: () => void;
+  onAgentMicrophoneDown?: () => void;
+  onAgentMicrophoneUp?: () => void;
   loadingView: React.ComponentType;
   waitingView: React.ComponentType<WaitingProps>;
   ringingView: React.ComponentType<RingingViewProps>;
