@@ -13,7 +13,9 @@ const InCall = ({ hangUp, toggleHold, timer }: InCallViewProps) => {
     <Container>
       In call ({secondsToTime(timer)})
       <div>
-        <ActionButton onClick={onHoldClick}>{isOnHold ? 'Resume' : 'Hold'}</ActionButton>
+        <ActionButton onClick={onHoldClick}>
+          {isOnHold ? 'Resume' : 'Hold'}
+        </ActionButton>
         <ActionButton onClick={hangUp}>Hang up</ActionButton>
       </div>
     </Container>

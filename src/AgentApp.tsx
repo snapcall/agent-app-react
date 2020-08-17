@@ -5,7 +5,10 @@ import defaultLoadingView from './views/loading';
 import defaultWaitingView from './views/waiting';
 import defaultRingingView from './views/ringing';
 import defaultInCallView from './views/inCall';
-import { checkMicrophoneLevel, endMicrophoneLevelCheck } from './helpers/microphoneLevelCheck';
+import {
+  checkMicrophoneLevel,
+  endMicrophoneLevelCheck,
+} from './helpers/microphoneLevelCheck';
 
 declare global {
   interface Window {
@@ -64,27 +67,27 @@ const AgentApp = ({
     });
   };
 
-const clientNetworkCheck = (event: CustomEvent) => {
-  const { secsSinceMedia, deadAudio, from, rtt } = event.detail.data;
-  const shouldNotify = secsSinceMedia % 5 === 0;
-  if (deadAudio && (shouldNotify || secsSinceMedia === 1)) {
-    /**
-     * Case no.1: deadAudio is sent when no audio packets are received
-     * Then we can assume the connection has been lost.
-     */
-    if (onClientLostConnection) onClientLostConnection();
-  } else if (rtt || from) {
-    /**
-     * Case no.2: handles bad network quality from the customer side.
-     * I tried with several use cases
-     *  - Very bad connection:
-     *    We only received the rtt value which usually is above 1000
-     *  - 3G and Edge:
-     *    We received this object: { "from": { lossRate: 0.5 }, "rtt": 1000 }
-     */
-    if (onClientWeakNetwork) onClientWeakNetwork();
-  }
-};
+  const clientNetworkCheck = (event: CustomEvent) => {
+    const { secsSinceMedia, deadAudio, from, rtt } = event.detail.data;
+    const shouldNotify = secsSinceMedia % 5 === 0;
+    if (deadAudio && (shouldNotify || secsSinceMedia === 1)) {
+      /**
+       * Case no.1: deadAudio is sent when no audio packets are received
+       * Then we can assume the connection has been lost.
+       */
+      if (onClientLostConnection) onClientLostConnection();
+    } else if (rtt || from) {
+      /**
+       * Case no.2: handles bad network quality from the customer side.
+       * I tried with several use cases
+       *  - Very bad connection:
+       *    We only received the rtt value which usually is above 1000
+       *  - 3G and Edge:
+       *    We received this object: { "from": { lossRate: 0.5 }, "rtt": 1000 }
+       */
+      if (onClientWeakNetwork) onClientWeakNetwork();
+    }
+  };
 
   const onDisconnectEvent = () => {
     if (onDisconnect) onDisconnect();
@@ -153,7 +156,10 @@ const clientNetworkCheck = (event: CustomEvent) => {
     window.addEventListener('snapcallEvent_callEnd', onCallEnd);
     window.addEventListener('snapcallEvent_callDisconnect', onDisconnectEvent);
     window.addEventListener('snapcallEvent_callReconnect', onReconnectEvent);
-    window.addEventListener('snapcallEvent_receiveInfo', clientNetworkCheck as EventListener);
+    window.addEventListener(
+      'snapcallEvent_receiveInfo',
+      clientNetworkCheck as EventListener
+    );
     return () => {
       window.removeEventListener('snapcallEvent_init', onInit);
       window.removeEventListener(
@@ -170,9 +176,18 @@ const clientNetworkCheck = (event: CustomEvent) => {
         onCallCurrentTimer as EventListener
       );
       window.removeEventListener('snapcallEvent_callEnd', onCallEnd);
-      window.removeEventListener('snapcallEvent_callDisconnect', onDisconnectEvent);
-      window.removeEventListener('snapcallEvent_callReconnect', onReconnectEvent);
-      window.removeEventListener('snapcallEvent_receiveInfo', clientNetworkCheck as EventListener);
+      window.removeEventListener(
+        'snapcallEvent_callDisconnect',
+        onDisconnectEvent
+      );
+      window.removeEventListener(
+        'snapcallEvent_callReconnect',
+        onReconnectEvent
+      );
+      window.removeEventListener(
+        'snapcallEvent_receiveInfo',
+        clientNetworkCheck as EventListener
+      );
     };
   }, []);
 
@@ -195,13 +210,15 @@ const clientNetworkCheck = (event: CustomEvent) => {
       <WaitingView
         resetWrapUpTime={() => {
           setView('loading');
-          window.snapcallAPI.resetWrapUpTime((err: string, success: boolean) => {
-            if (err) console.error(err);
-            if (success) {
-              setWrapUpTimeLeft(0);
-              setView('waiting');
+          window.snapcallAPI.resetWrapUpTime(
+            (err: string, success: boolean) => {
+              if (err) console.error(err);
+              if (success) {
+                setWrapUpTimeLeft(0);
+                setView('waiting');
+              }
             }
-          });
+          );
         }}
         wrapUpTimeLeft={wrapUpTimeLeft}
       />

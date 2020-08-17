@@ -19,13 +19,19 @@ export const endMicrophoneLevelCheck = () => {
     clearInterval(interval);
     interval = null;
   }
-  window.removeEventListener('snapcallEvent_audioLevelLocalMicrophone', onMicrophoneLevel as EventListener);
+  window.removeEventListener(
+    'snapcallEvent_audioLevelLocalMicrophone',
+    onMicrophoneLevel as EventListener
+  );
   checkingSince = 0;
   microphoneLevelSum = 0;
   numberOfFailedCheckInARow = 0;
 };
 
-const microphoneCheck = ({ onMicrophoneDown, onMicrophoneUp }: MicrophoneCheckOptions) => {
+const microphoneCheck = ({
+  onMicrophoneDown,
+  onMicrophoneUp,
+}: MicrophoneCheckOptions) => {
   if (checkingSince >= 10 && lastState === 'up') {
     endMicrophoneLevelCheck();
     return;
@@ -47,7 +53,10 @@ const microphoneCheck = ({ onMicrophoneDown, onMicrophoneUp }: MicrophoneCheckOp
 };
 
 export const checkMicrophoneLevel = (options: MicrophoneCheckOptions) => {
-  window.addEventListener('snapcallEvent_audioLevelLocalMicrophone', onMicrophoneLevel as EventListener);
+  window.addEventListener(
+    'snapcallEvent_audioLevelLocalMicrophone',
+    onMicrophoneLevel as EventListener
+  );
   const bindedCheck = microphoneCheck.bind(null, options);
   interval = setInterval(bindedCheck, 1000);
 };
