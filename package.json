@@ -32,7 +32,7 @@
     "trailingComma": "es5"
   },
   "name": "agent-app",
-  "author": "ballanger.julien@gmail.com",
+  "author": "hello@snapcall.io",
   "module": "dist/agent-app.esm.js",
   "devDependencies": {
     "@types/react": "^16.9.46",
