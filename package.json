@@ -10,6 +10,13 @@
   "engines": {
     "node": ">=10"
   },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/snapcall/agent-app-react.git"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  },
   "scripts": {
     "start": "tsdx watch",
     "build": "tsdx build",
@@ -31,7 +38,7 @@
     "singleQuote": true,
     "trailingComma": "es5"
   },
-  "name": "agent-app",
+  "name": "@snapcall/agent-app-react",
   "author": "hello@snapcall.io",
   "module": "dist/agent-app.esm.js",
   "devDependencies": {
