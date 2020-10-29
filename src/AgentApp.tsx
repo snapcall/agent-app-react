@@ -63,7 +63,10 @@ const AgentApp = ({
         const wrapUpTimeLeftInSeconds = Math.floor(agent.wrapUpTimeLeft / 1000);
         setWrapUpTimeLeft(wrapUpTimeLeftInSeconds);
       }
-      setView('waiting');
+      setView((currentView) => {
+        if (currentView === 'ringing') return 'ringing';
+        return 'waiting';
+      });
     });
   };
 
