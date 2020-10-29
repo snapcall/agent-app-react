@@ -69,7 +69,11 @@ const App = () => {
           Logged in as: {agentEmail}
           <button onClick={onLogoutClick}>Logout</button>
         </LoggedInHeader>
-        <AgentApp apiKey={apiKey} agentEmail={agentEmail} />
+        <AgentApp
+          apiKey={apiKey}
+          agentEmail={agentEmail}
+          snapcalljsUrl="https://sandbox.snapcall.io/snap/snapcalljs/snapcalljs-development.js"
+        />
       </div>
     );
   }
