@@ -21,10 +21,9 @@ interface AgentStatus {
   wrapUpTimeLeft: number;
 }
 
-const loadScript = () => {
+const loadScript = (url: string) => {
   const script = document.createElement('script');
-  script.src =
-    'https://sandbox.snapcall.io/snap/snapcalljs/snapcalljs-development.js';
+  script.src = url;
   document.body.appendChild(script);
 };
 
@@ -33,6 +32,7 @@ let wrapUpTimeLeftInterval: number | null = null;
 const AgentApp = ({
   apiKey,
   agentEmail,
+  snapcalljsUrl = 'https://snap.snapcall.io/snapapp.min.js',
   onDisconnect,
   onReconnect,
   onClientLostConnection,
@@ -63,7 +63,10 @@ const AgentApp = ({
         const wrapUpTimeLeftInSeconds = Math.floor(agent.wrapUpTimeLeft / 1000);
         setWrapUpTimeLeft(wrapUpTimeLeftInSeconds);
       }
-      setView('waiting');
+      setView((currentView) => {
+        if (currentView === 'ringing') return 'ringing';
+        return 'waiting';
+      });
     });
   };
 
@@ -141,7 +144,7 @@ const AgentApp = ({
   React.useEffect(() => {
     if (!apiKey) throw new Error('"apiKey" is a required prop');
     if (!agentEmail) throw new Error('"agentEmail" is a required prop');
-    loadScript();
+    loadScript(snapcalljsUrl);
     window.addEventListener('snapcallEvent_init', onInit);
     window.addEventListener('snapcallEvent_login', onLogin as EventListener);
     window.addEventListener(
