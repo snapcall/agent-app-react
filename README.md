@@ -25,6 +25,7 @@ const App = () => (
 | --- | --- | --- |
 | `apiKey` | `string` | Your SnapCall API key
 | `agentEmail` | `string` | The email of the agent receiving calls
+| `snapcalljsUrl` | `?string` | A custom URL for the SnapCall Widget SDK script
 | `onDisconnect` | `?() => void` | Event triggered when the agent got disconnected
 | `onReconnect` | `?() => void` | Event triggered when the agent got reconnected
 | `onClientLostConnection` | `?() => void` | Event triggered when the client lost connection

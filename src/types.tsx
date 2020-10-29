@@ -1,6 +1,7 @@
 export interface AgentAppProps {
   apiKey: string;
   agentEmail: string;
+  snapcalljsUrl?: string;
   onDisconnect?: () => void;
   onReconnect?: () => void;
   onClientLostConnection?: () => void;
