@@ -46,7 +46,7 @@
     "@types/react-dom": "^16.9.8",
     "@types/styled-components": "^5.1.4",
     "husky": "^4.3.0",
-    "react": "^16.13.1",
+    "react": "^16.14.0",
     "react-dom": "^16.13.1",
     "styled-components": "^5.2.0",
     "tsdx": "^0.14.1",
