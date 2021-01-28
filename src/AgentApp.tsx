@@ -200,7 +200,7 @@ const AgentApp = ({
 
   React.useEffect(() => {
     if (wrapUpTimeLeft > 0 && !wrapUpTimeLeftInterval) {
-      wrapUpTimeLeftInterval = setInterval(updateWrapUpTimeLeft, 1000);
+      wrapUpTimeLeftInterval = window.setInterval(updateWrapUpTimeLeft, 1000);
     } else if (wrapUpTimeLeft <= 0) {
       if (wrapUpTimeLeftInterval) clearInterval(wrapUpTimeLeftInterval);
       wrapUpTimeLeftInterval = null;
