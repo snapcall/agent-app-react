@@ -58,5 +58,5 @@ export const checkMicrophoneLevel = (options: MicrophoneCheckOptions) => {
     onMicrophoneLevel as EventListener
   );
   const bindedCheck = microphoneCheck.bind(null, options);
-  interval = setInterval(bindedCheck, 1000);
+  interval = window.setInterval(bindedCheck, 1000);
 };
