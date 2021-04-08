@@ -42,7 +42,7 @@
   "author": "hello@snapcall.io",
   "module": "dist/agent-app.esm.js",
   "devDependencies": {
-    "@types/react": "^16.9.55",
+    "@types/react": "^17.0.3",
     "@types/react-dom": "^16.9.9",
     "@types/styled-components": "^5.1.7",
     "husky": "^4.3.8",
