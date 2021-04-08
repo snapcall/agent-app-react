@@ -5,6 +5,7 @@ import defaultLoadingView from './views/loading';
 import defaultWaitingView from './views/waiting';
 import defaultRingingView from './views/ringing';
 import defaultInCallView from './views/inCall';
+import Video from './components/video';
 import {
   checkMicrophoneLevel,
   endMicrophoneLevelCheck,
@@ -63,7 +64,7 @@ const AgentApp = ({
         const wrapUpTimeLeftInSeconds = Math.floor(agent.wrapUpTimeLeft / 1000);
         setWrapUpTimeLeft(wrapUpTimeLeftInSeconds);
       }
-      setView((currentView) => {
+      setView(currentView => {
         if (currentView === 'ringing') return 'ringing';
         return 'waiting';
       });
@@ -245,6 +246,7 @@ const AgentApp = ({
         hangUp={window.snapcallAPI.endCall}
         toggleHold={window.snapcallAPI.clientHold}
         timer={callTimer}
+        Video={Video}
       />
     );
   }
