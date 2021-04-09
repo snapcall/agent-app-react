@@ -32,10 +32,10 @@ const App = () => (
 | `onClientWeakNetwork` | `?() => void` | Event triggered when the client network is weak
 | `onAgentMicrophoneDown` | `?() => void` | Event triggered when the agent microphone is down
 | `onAgentMicrophoneUp` | `?() => void` | Event triggered when the agent microphone is up
-| `loadingView` | `?() => React$Node` | View used for loading
-| `waitingView` | `?({ resetWrapUpTime: Function, wrapUpTimeLeft: number }) => React$Node` | View used when the agent is waiting for a call (ready)
-| `ringingView` | `?({ answer: Function, decline: Function, callID: string }) => React$Node` | View used when the agent is receiving a call
-| `inCallView` | `?({ hangUp: Function, toggleHold: Function, timer: number, Video: React$Node }) => React$Node` | View used when the agent is in call
+| `loadingView` | `?() => ReactNode` | View used for loading
+| `waitingView` | `?({ resetWrapUpTime: Function, wrapUpTimeLeft: number }) => ReactNode` | View used when the agent is waiting for a call (ready)
+| `ringingView` | `?({ answer: Function, decline: Function, callID: string }) => ReactNode` | View used when the agent is receiving a call
+| `inCallView` | `?({ hangUp: Function, toggleHold: Function, timer: number, Video: ReactNode }) => ReactNode` | View used when the agent is in call
 
 ## Example
 
