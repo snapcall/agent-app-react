@@ -35,7 +35,7 @@ const App = () => (
 | `loadingView` | `?() => React$Node` | View used for loading
 | `waitingView` | `?({ resetWrapUpTime: Function, wrapUpTimeLeft: number }) => React$Node` | View used when the agent is waiting for a call (ready)
 | `ringingView` | `?({ answer: Function, decline: Function, callID: string }) => React$Node` | View used when the agent is receiving a call
-| `inCallView` | `?({ hangUp: Function, toggleHold: Function, timer: number }) => React$Node` | View used when the agent is in call
+| `inCallView` | `?({ hangUp: Function, toggleHold: Function, timer: number, Video: React$Node }) => React$Node` | View used when the agent is in call
 
 ## Example
 
