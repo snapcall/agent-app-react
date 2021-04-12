@@ -53,19 +53,17 @@ The **Video** component is available as a props for the `inCallView`.
 ```js
 import { AgentApp } from '@snapcall/agent-app-react';
 
-const RingingView = ({ answer, decline, callID }) => {
-  return (
-    <div>
-      <p>A call is coming! (ID: {callID})</p>
-      <button onClick={answer}>Answer</button>
-      <button onClick={decline}>Decline</button>
-    </div>
-  );
-};
+const RingingView = ({ answer, decline, callID }) => (
+  <div>
+    <p>A call is coming! (ID: {callID})</p>
+    <button onClick={answer}>Answer</button>
+    <button onClick={decline}>Decline</button>
+  </div>
+);
 
 const InCallView = ({ hangUp, timer, Video }) => (
   <div>
-    <Video timer={timer}>
+    <Video timer={timer} />
     <button onClick={hangUp}>Hang up</button>
   </div>
 );
