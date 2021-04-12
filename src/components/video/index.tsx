@@ -19,7 +19,7 @@ import {
   TimerContainer,
 } from './style';
 
-const Video = ({ className, style, timer, hideControls }: VideoProps) => {
+const Video = ({ timer, hideControls }: VideoProps) => {
   const localWebcamRef = React.useRef<HTMLVideoElement>(null);
   const remoteVideoRef = React.useRef<HTMLVideoElement>(null);
   const videoButtonsTimeout = React.useRef<NodeJS.Timeout>();
@@ -120,7 +120,7 @@ const Video = ({ className, style, timer, hideControls }: VideoProps) => {
   }, []);
 
   return (
-    <VideoWrapper className={className} style={style}>
+    <VideoWrapper>
       <VideoContainer
         onMouseMove={onMouseMove}
         onMouseLeave={onMouseLeave}
@@ -169,15 +169,11 @@ const Video = ({ className, style, timer, hideControls }: VideoProps) => {
 };
 
 Video.defaultProps = {
-  className: '',
-  style: {},
   timer: null,
   hideControls: false,
 };
 
 Video.propTypes = {
-  className: PropTypes.string,
-  style: PropTypes.object,
   timer: PropTypes.number,
   hideControls: PropTypes.bool,
 };

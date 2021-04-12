@@ -17,8 +17,6 @@ export interface AgentAppProps {
 }
 
 export interface VideoProps {
-  className?: string;
-  style?: CSSProperties;
   timer?: number | null;
   hideControls?: boolean;
 }
