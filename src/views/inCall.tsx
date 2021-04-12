@@ -12,8 +12,10 @@ const InCall = ({ hangUp, toggleHold, timer, Video }: InCallViewProps) => {
   return (
     <Container>
       In call ({secondsToTime(timer)})
-      <div>
+      <div style={{ width: '400px' }}>
         <Video />
+      </div>
+      <div>
         <ActionButton onClick={onHoldClick}>
           {isOnHold ? 'Resume' : 'Hold'}
         </ActionButton>
