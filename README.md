@@ -21,6 +21,8 @@ const App = () => (
 
 ## Props
 
+### AgentApp
+
 | Name | Type | Description
 | --- | --- | --- |
 | `apiKey` | `string` | Your SnapCall API key
@@ -37,6 +39,15 @@ const App = () => (
 | `ringingView` | `?({ answer: Function, decline: Function, callID: string }) => ReactNode` | View used when the agent is receiving a call
 | `inCallView` | `?({ hangUp: Function, toggleHold: Function, timer: number, Video: ReactNode }) => ReactNode` | View used when the agent is in call
 
+### Video
+
+The **Video** component is available as a props for the `inCallView`.
+
+| Name | Type | Description
+| --- | --- | --- |
+| `timer` | `?number` | If set, will display the call timer on top of the video element
+| `hideControls` | `?boolean` | Whether the control buttons should be displayed or not
+
 ## Example
 
 ```js
@@ -52,11 +63,19 @@ const RingingView = ({ answer, decline, callID }) => {
   );
 };
 
+const InCallView = ({ hangUp, timer, Video }) => (
+  <div>
+    <Video timer={timer}>
+    <button onClick={hangUp}>Hang up</button>
+  </div>
+);
+
 const App = () => (
   <AgentApp
     apiKey="123"
     agentEmail="sauveur@snapcall.io"
     ringingView={RingingView}
+    inCallView={InCallView}
     onClientLostConnection={() => console.log('The client lost the connection!!')}
   />
 );
