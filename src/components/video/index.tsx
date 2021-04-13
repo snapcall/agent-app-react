@@ -22,7 +22,7 @@ import {
 const Video = ({ timer, hideControls }: VideoProps) => {
   const localWebcamRef = React.useRef<HTMLVideoElement>(null);
   const remoteVideoRef = React.useRef<HTMLVideoElement>(null);
-  const videoButtonsTimeout = React.useRef<NodeJS.Timeout>();
+  const videoButtonsTimeout = React.useRef<number>();
   const [isScreenSharing, setIsScreenSharing] = React.useState(false);
   const [isShowingWebcam, setIsShowingWebcam] = React.useState(false);
   const [isReceivingRemoteStream, setIsReceivingRemoteStream] = React.useState(
@@ -72,7 +72,7 @@ const Video = ({ timer, hideControls }: VideoProps) => {
     if (!isReceivingRemoteStream) return;
     if (videoButtonsTimeout.current) clearTimeout(videoButtonsTimeout.current);
     setIsIdle(false);
-    videoButtonsTimeout.current = setTimeout(() => {
+    videoButtonsTimeout.current = window.setTimeout(() => {
       setIsIdle(true);
     }, 2000);
   };
