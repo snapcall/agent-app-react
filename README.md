@@ -21,6 +21,8 @@ const App = () => (
 
 ## Props
 
+### AgentApp
+
 | Name | Type | Description
 | --- | --- | --- |
 | `apiKey` | `string` | Your SnapCall API key
@@ -32,31 +34,46 @@ const App = () => (
 | `onClientWeakNetwork` | `?() => void` | Event triggered when the client network is weak
 | `onAgentMicrophoneDown` | `?() => void` | Event triggered when the agent microphone is down
 | `onAgentMicrophoneUp` | `?() => void` | Event triggered when the agent microphone is up
-| `loadingView` | `?() => React$Node` | View used for loading
-| `waitingView` | `?({ resetWrapUpTime: Function, wrapUpTimeLeft: number }) => React$Node` | View used when the agent is waiting for a call (ready)
-| `ringingView` | `?({ answer: Function, decline: Function, callID: string }) => React$Node` | View used when the agent is receiving a call
-| `inCallView` | `?({ hangUp: Function, toggleHold: Function, timer: number }) => React$Node` | View used when the agent is in call
+| `loadingView` | `?() => ReactNode` | View used for loading
+| `waitingView` | `?({ resetWrapUpTime: Function, wrapUpTimeLeft: number }) => ReactNode` | View used when the agent is waiting for a call (ready)
+| `ringingView` | `?({ answer: Function, decline: Function, callID: string }) => ReactNode` | View used when the agent is receiving a call
+| `inCallView` | `?({ hangUp: Function, toggleHold: Function, timer: number, Video: ReactNode }) => ReactNode` | View used when the agent is in call
+
+### Video
+
+The **Video** component is available as a props for the `inCallView`.
+
+| Name | Type | Description
+| --- | --- | --- |
+| `timer` | `?number` | If set, will display the call timer on top of the video element
+| `hideControls` | `?boolean` | Whether the control buttons should be displayed or not
 
 ## Example
 
 ```js
 import { AgentApp } from '@snapcall/agent-app-react';
 
-const RingingView = ({ answer, decline, callID }) => {
-  return (
-    <div>
-      <p>A call is coming! (ID: {callID})</p>
-      <button onClick={answer}>Answer</button>
-      <button onClick={decline}>Decline</button>
-    </div>
-  );
-};
+const RingingView = ({ answer, decline, callID }) => (
+  <div>
+    <p>A call is coming! (ID: {callID})</p>
+    <button onClick={answer}>Answer</button>
+    <button onClick={decline}>Decline</button>
+  </div>
+);
+
+const InCallView = ({ hangUp, timer, Video }) => (
+  <div>
+    <Video timer={timer} />
+    <button onClick={hangUp}>Hang up</button>
+  </div>
+);
 
 const App = () => (
   <AgentApp
     apiKey="123"
     agentEmail="sauveur@snapcall.io"
     ringingView={RingingView}
+    inCallView={InCallView}
     onClientLostConnection={() => console.log('The client lost the connection!!')}
   />
 );
