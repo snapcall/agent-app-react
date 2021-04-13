@@ -1,3 +1,5 @@
+import { CSSProperties } from 'styled-components';
+
 export interface AgentAppProps {
   apiKey: string;
   agentEmail: string;
@@ -12,6 +14,11 @@ export interface AgentAppProps {
   waitingView: React.ComponentType<WaitingProps>;
   ringingView: React.ComponentType<RingingViewProps>;
   inCallView: React.ComponentType<InCallViewProps>;
+}
+
+export interface VideoProps {
+  timer?: number | null;
+  hideControls?: boolean;
 }
 
 export interface WaitingProps {
@@ -29,4 +36,15 @@ export interface InCallViewProps {
   hangUp: () => void;
   toggleHold: () => void;
   timer: number;
+  Video: React.ComponentType<VideoProps>;
+}
+
+declare global {
+  interface Document {
+    pictureInPictureEnabled: boolean;
+  }
+
+  interface HTMLVideoElement {
+    requestPictureInPicture: () => void;
+  }
 }
