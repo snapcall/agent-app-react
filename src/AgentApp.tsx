@@ -225,6 +225,10 @@ const AgentApp = ({
           );
         }}
         wrapUpTimeLeft={wrapUpTimeLeft}
+        startOutboundCall={({ phoneNumber }) => {
+          setView('loading');
+          window.snapcallAPI.outboundCallV2(agentEmail, null, phoneNumber, {});
+        }}
       />
     );
   }

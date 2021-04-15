@@ -35,9 +35,40 @@ const App = () => (
 | `onAgentMicrophoneDown` | `?() => void` | Event triggered when the agent microphone is down
 | `onAgentMicrophoneUp` | `?() => void` | Event triggered when the agent microphone is up
 | `loadingView` | `?() => ReactNode` | View used for loading
-| `waitingView` | `?({ resetWrapUpTime: Function, wrapUpTimeLeft: number }) => ReactNode` | View used when the agent is waiting for a call (ready)
+| `waitingView` | `?({ resetWrapUpTime: Function, wrapUpTimeLeft: number, startOutboundCall: Function }) => ReactNode` | View used when the agent is waiting for a call (ready)
 | `ringingView` | `?({ answer: Function, decline: Function, callID: string }) => ReactNode` | View used when the agent is receiving a call
 | `inCallView` | `?({ hangUp: Function, toggleHold: Function, timer: number, Video: ReactNode }) => ReactNode` | View used when the agent is in call
+
+## Waiting view
+
+Parameters available in the `WaitingView` component:
+
+| Name | Type | Description
+| --- | --- | --- |
+| `resetWrapUpTime` | `() => void` | Alias for `snapcallAPI.resetWrapUpTime`
+| `wrapUpTimeLeft` | `number` | Seconds left until wrap up time is over
+| `startOutboundCall` | `({ phoneNumber: string }) => void` | Start an outbound call on the provided phone number
+
+## Ringing view
+
+Parameters available in the `RingingView` component:
+
+| Name | Type | Description
+| --- | --- | --- |
+| `answer` | `() => void` | Function to answer the call
+| `decline` | `() => void` | Function to decline the call
+| `callID` | `string` | The ID of the ringing call
+
+## In Call View
+
+Parameters available in the `InCallView` component:
+
+| Name | Type | Description
+| --- | --- | --- |
+| `hangUp` | `() => void` | Function to hang up the call
+| `toggleHold` | `() => void` | Function to put the call on hold or to resume it
+| `timer` | `number` | Seconds since the call started
+| `Video` | `ReactNode` | See **Video** component details below
 
 ### Video
 
