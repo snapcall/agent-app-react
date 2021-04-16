@@ -1,5 +1,5 @@
 {
-  "version": "1.0.0",
+  "version": "1.1.0",
   "license": "MIT",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
@@ -12,6 +12,9 @@
   "repository": {
     "type": "git",
     "url": "git://github.com/snapcall/agent-app-react.git"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "scripts": {
     "start": "tsdx watch",

@@ -1,5 +1,3 @@
-import { CSSProperties } from 'styled-components';
-
 export interface AgentAppProps {
   apiKey: string;
   agentEmail: string;
@@ -24,6 +22,7 @@ export interface VideoProps {
 export interface WaitingProps {
   resetWrapUpTime: () => void;
   wrapUpTimeLeft: number;
+  startOutboundCall: ({ phoneNumber }: { phoneNumber: string }) => void;
 }
 
 export interface RingingViewProps {
