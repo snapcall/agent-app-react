@@ -13,6 +13,9 @@
     "type": "git",
     "url": "git://github.com/snapcall/agent-app-react.git"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "start": "tsdx watch",
     "build": "tsdx build",
