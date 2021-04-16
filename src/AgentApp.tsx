@@ -33,7 +33,7 @@ let wrapUpTimeLeftInterval: number | null = null;
 const AgentApp = ({
   apiKey,
   agentEmail,
-  snapcalljsUrl = 'https://snap.snapcall.io/snapapp.min.js',
+  snapcalljsUrl = 'https://cdn.snapcall.io/js/snapcall-latest.min.js',
   onDisconnect,
   onReconnect,
   onClientLostConnection,
@@ -225,6 +225,10 @@ const AgentApp = ({
           );
         }}
         wrapUpTimeLeft={wrapUpTimeLeft}
+        startOutboundCall={({ phoneNumber }) => {
+          setView('loading');
+          window.snapcallAPI.outboundCallV2(agentEmail, null, phoneNumber, {});
+        }}
       />
     );
   }
