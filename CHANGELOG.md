@@ -1,6 +1,12 @@
 # CHANGELOG
 
-## 1.0.0 (April 13, 2020)
+## 1.1.0 (April 16, 2021)
+
+- Comment out npmjs publish from the release workflow for the time being ([#83](https://github.com/snapcall/agent-app-react/pull/83))
+- Update default `snapcalljsUrl` value ([#82](https://github.com/snapcall/agent-app-react/pull/82))
+- Add a `startOutboundCall` function in the `WaitingView` ([#78](https://github.com/snapcall/agent-app-react/pull/78))
+
+## 1.0.0 (April 13, 2021)
 
 - Update release workflow to publish on both GPR and npmjs ([#76](https://github.com/snapcall/agent-app-react/pull/76))
 - Add a **Video** element, available in the `InCall` view ([#75](https://github.com/snapcall/agent-app-react/pull/75))
