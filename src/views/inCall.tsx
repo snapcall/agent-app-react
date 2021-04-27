@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { InCallViewProps } from '../types';
-import secondsToTime from '../helpers/secondsToTime';
-import { Container, ActionButton } from './style';
+import { Container, VideoContainer, ButtonsContainer, Button } from './style';
 
 const InCall = ({ hangUp, toggleHold, timer, Video }: InCallViewProps) => {
   const [isOnHold, setIsOnHold] = React.useState(false);
@@ -11,16 +10,15 @@ const InCall = ({ hangUp, toggleHold, timer, Video }: InCallViewProps) => {
   };
   return (
     <Container>
-      In call ({secondsToTime(timer)})
-      <div style={{ width: '400px' }}>
-        <Video />
-      </div>
-      <div>
-        <ActionButton onClick={onHoldClick}>
-          {isOnHold ? 'Resume' : 'Hold'}
-        </ActionButton>
-        <ActionButton onClick={hangUp}>Hang up</ActionButton>
-      </div>
+      <VideoContainer>
+        <Video timer={timer} />
+      </VideoContainer>
+      <ButtonsContainer>
+        <Button onClick={onHoldClick}>{isOnHold ? 'Resume' : 'Hold'}</Button>
+        <Button onClick={hangUp} danger>
+          Hang up
+        </Button>
+      </ButtonsContainer>
     </Container>
   );
 };
