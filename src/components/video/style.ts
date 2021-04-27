@@ -3,7 +3,6 @@ import styled from 'styled-components';
 export const VideoWrapper = styled.div`
   position: relative;
   padding-bottom: 56.25%;
-  margin-bottom: 25px;
   width: 100%;
   min-width: 320px;
 `;
