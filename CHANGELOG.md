@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 1.1.1 (May 7, 2021)
+
+- Update `README.md` ([#88](https://github.com/snapcall/agent-app-react/pull/88))
+- Add `styled-components` as a dependency ([#87](https://github.com/snapcall/agent-app-react/pull/87))
+- Bump dependencies
+
 ## 1.1.0 (April 16, 2021)
 
 - Comment out npmjs publish from the release workflow for the time being ([#83](https://github.com/snapcall/agent-app-react/pull/83))
