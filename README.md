@@ -2,12 +2,12 @@
 
 The SnapCall Agent App is a react component that will help you integrate SnapCall to receive calls.
 
-This component is using the [SnapCall widget API](https://doc.snapcall.io/#widget-api-receive-call-agent-side).
+This component is using the [SnapCall widget API](https://doc.snapcall.io/#widget-api-receive-call-agent-side), and need a working react environment like [this one](https://codesandbox.io/s/sparkling-field-1w7yc?file=/src/index.js).
 
 ## Installation
 
 ```
-npm install @snapcall/agent-app-react
+npm install @snapcall_/agent-app-react
 ```
 
 ## Basic usage
