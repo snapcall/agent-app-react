@@ -5,6 +5,7 @@ export const VideoWrapper = styled.div`
   padding-bottom: 56.25%;
   width: 100%;
   min-width: 320px;
+  margin-bottom: 20px;
 `;
 
 export const VideoContainer = styled.div<{ idle: boolean }>`

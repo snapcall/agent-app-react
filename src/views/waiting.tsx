@@ -1,11 +1,21 @@
 import * as React from 'react';
+import '@livechat/design-system/dist/design-system.css';
+import { Card, Button } from '@livechat/design-system';
 import { WaitingProps } from '../types';
+import Video from '../components/video';
 import secondsToTime from '../helpers/secondsToTime';
-import { Container } from './style';
 
 const Waiting = ({ wrapUpTimeLeft, resetWrapUpTime }: WaitingProps) => {
   return (
-    <Container>
+    <Card
+      title=""
+      style={{
+        width: '400px',
+        display: 'flex',
+        flexDirection: 'column',
+        margin: '0 auto',
+      }}
+    >
       {wrapUpTimeLeft ? (
         <React.Fragment>
           <span>In wrap up time</span>
@@ -15,9 +25,14 @@ const Waiting = ({ wrapUpTimeLeft, resetWrapUpTime }: WaitingProps) => {
           <button onClick={resetWrapUpTime}>Go online</button>
         </React.Fragment>
       ) : (
-        <p>Ready to receive calls</p>
+        <>
+          <Video />
+          <Button kind="secondary" disabled>
+            Waiting for a call...
+          </Button>
+        </>
       )}
-    </Container>
+    </Card>
   );
 };
 
