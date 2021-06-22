@@ -14,6 +14,7 @@ import {
   VideoButtonsContainer,
   FixedContainer,
   LeftButtonsContainer,
+  CenterButtonsContainer,
   RightButtonsContainer,
   VideoButton,
   TimerContainer,
@@ -131,7 +132,8 @@ const Video = ({ timer, hideControls }: VideoProps) => {
         <VideoText>Enable video or screen sharing</VideoText>
         <VideoButtonsContainer visible={!isIdle}>
           <FixedContainer>
-            <LeftButtonsContainer>
+            <LeftButtonsContainer />
+            <CenterButtonsContainer>
               {!hideControls && (
                 <>
                   <VideoButton onClick={onWebcamClick}>
@@ -146,7 +148,7 @@ const Video = ({ timer, hideControls }: VideoProps) => {
                   </VideoButton>
                 </>
               )}
-            </LeftButtonsContainer>
+            </CenterButtonsContainer>
             <RightButtonsContainer>
               {timer !== null && (
                 <TimerContainer>{secondsToTime(timer || 0)}</TimerContainer>
