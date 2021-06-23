@@ -49,6 +49,7 @@ export const VideoText = styled.p`
   align-items: flex-end;
   flex: 1;
   color: #cccccc;
+  font-weight: bold;
 `;
 
 export const VideoButtonsContainer = styled.div<{ visible: boolean }>`

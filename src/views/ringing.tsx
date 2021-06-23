@@ -1,20 +1,17 @@
 import * as React from 'react';
+import { Button } from '@livechat/design-system';
 import { RingingViewProps } from '../types';
-import { Container, ButtonsContainer, Button } from './style';
+import Video from '../components/video';
+import { FlexCard } from './style';
 
-const Ringing = ({ answer, decline }: RingingViewProps) => {
+const Ringing = ({ answer }: RingingViewProps) => {
   return (
-    <Container>
-      A call is coming!
-      <ButtonsContainer>
-        <Button onClick={answer} primary>
-          Answer
-        </Button>
-        <Button onClick={decline} danger>
-          Decline
-        </Button>
-      </ButtonsContainer>
-    </Container>
+    <FlexCard>
+      <Video hideControls />
+      <Button kind="primary" onClick={answer}>
+        Answer
+      </Button>
+    </FlexCard>
   );
 };
 
