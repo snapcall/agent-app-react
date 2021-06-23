@@ -102,7 +102,7 @@ const AgentApp = ({
   };
 
   const onInit = () => {
-    window.snapcallAPI.setApiCredentials(apiKey, 'deprecated');
+    window.snapcallAPI.setAPIKey(apiKey);
     window.snapcallAPI.agentLogin(agentEmail);
   };
 
