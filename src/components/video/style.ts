@@ -95,16 +95,6 @@ export const LeftButtonsContainer = styled.div`
   }
 `;
 
-export const CenterButtonsContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  flex: 1;
-
-  ${VideoButton}:not(:first-child) {
-    margin-left: 10px;
-  }
-`;
-
 export const RightButtonsContainer = styled.div`
   display: flex;
   justify-content: flex-end;

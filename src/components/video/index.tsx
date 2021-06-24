@@ -15,7 +15,6 @@ import {
   VideoButtonsContainer,
   FixedContainer,
   LeftButtonsContainer,
-  CenterButtonsContainer,
   RightButtonsContainer,
   VideoButton,
   TimerContainer,
@@ -151,15 +150,6 @@ const Video = ({ timer, hideControls }: VideoProps) => {
         <VideoButtonsContainer visible={!isIdle}>
           <FixedContainer>
             <LeftButtonsContainer>
-              {displayCameraFlip && isShowingWebcam && (
-                <VideoButton onClick={onWebcamFlipClick}>
-                  <span>
-                    <CameraFlipIcon />
-                  </span>
-                </VideoButton>
-              )}
-            </LeftButtonsContainer>
-            <CenterButtonsContainer>
               {!hideControls && (
                 <>
                   <VideoButton onClick={onWebcamClick}>
@@ -174,7 +164,14 @@ const Video = ({ timer, hideControls }: VideoProps) => {
                   </VideoButton>
                 </>
               )}
-            </CenterButtonsContainer>
+              {displayCameraFlip && isShowingWebcam && (
+                <VideoButton onClick={onWebcamFlipClick}>
+                  <span>
+                    <CameraFlipIcon />
+                  </span>
+                </VideoButton>
+              )}
+            </LeftButtonsContainer>
             <RightButtonsContainer>
               {timer !== null && (
                 <TimerContainer>{secondsToTime(timer || 0)}</TimerContainer>
