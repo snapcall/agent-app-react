@@ -152,14 +152,14 @@ const Video = ({ timer, hideControls }: VideoProps) => {
             <LeftButtonsContainer>
               {!hideControls && (
                 <>
-                  <VideoButton onClick={onWebcamClick}>
-                    <span>
-                      <CameraIcon slash={!isShowingWebcam} />
-                    </span>
-                  </VideoButton>
                   <VideoButton onClick={onScreenShareClick}>
                     <span>
                       <ScreenShareIcon slash={!isScreenSharing} />
+                    </span>
+                  </VideoButton>
+                  <VideoButton onClick={onWebcamClick}>
+                    <span>
+                      <CameraIcon slash={!isShowingWebcam} />
                     </span>
                   </VideoButton>
                 </>
