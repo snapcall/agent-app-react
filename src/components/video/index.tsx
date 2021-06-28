@@ -102,6 +102,7 @@ const Video = ({ timer, hideControls }: VideoProps) => {
 
   React.useEffect(() => {
     checkCamerasList();
+    window.addEventListener('snapcallEvent_mediaRequest', checkCamerasList);
     window.addEventListener('snapcallEvent_onWebcamStream', onRemoteStream);
     window.addEventListener(
       'snapcallEvent_onScreenSharingStream',
@@ -117,6 +118,10 @@ const Video = ({ timer, hideControls }: VideoProps) => {
     );
     window.snapcallAPI.displayRemoteVideo(remoteVideoRef.current);
     return () => {
+      window.removeEventListener(
+        'snapcallEvent_mediaRequest',
+        checkCamerasList
+      );
       window.removeEventListener(
         'snapcallEvent_onWebcamStream',
         onRemoteStream
