@@ -4,7 +4,6 @@ export const VideoWrapper = styled.div`
   position: relative;
   padding-bottom: 56.25%;
   width: 100%;
-  min-width: 320px;
   margin-bottom: 20px;
 `;
 
