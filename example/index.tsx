@@ -72,7 +72,7 @@ const App = () => {
         <AgentApp
           apiKey={apiKey}
           agentEmail={agentEmail}
-          snapcalljsUrl="https://cdn.snapcall.io/js/snapcall-2.1.0-sandbox.min.js"
+          snapcalljsUrl="https://sandbox.snapcall.io/snapapp-ts/dist/snapcall-2.1.0.min.js"
         />
       </div>
     );
