@@ -25,7 +25,7 @@ const Waiting = ({
       ) : (
         <>
           <Video hideControls />
-          <Button kind="secondary" disabled>
+          <Button kind="secondary" style={{ marginTop: '20px' }} disabled>
             Waiting for a call...
           </Button>
           <Separator />

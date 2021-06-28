@@ -8,7 +8,7 @@ const Ringing = ({ answer }: RingingViewProps) => {
   return (
     <FlexCard>
       <Video hideControls />
-      <Button kind="primary" onClick={answer}>
+      <Button kind="primary" onClick={answer} style={{ marginTop: '20px' }}>
         Answer
       </Button>
     </FlexCard>
