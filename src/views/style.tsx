@@ -20,6 +20,7 @@ export const ButtonsContainer = styled.div`
   display: flex;
   justify-content: space-between;
   width: 100%;
+  margin-top: 20px;
 
   button {
     flex: 1;
