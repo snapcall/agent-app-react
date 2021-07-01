@@ -16,9 +16,9 @@ jobs:
           registry-url: 'https://registry.npmjs.org'
           scope: '@snapcall'
       - run: npm install
-      #- run: npm publish
-      #  env:
-      #    NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
       - uses: actions/setup-node@v2.2.0
         with:
           registry-url: 'https://npm.pkg.github.com'
