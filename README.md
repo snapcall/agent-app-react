@@ -7,7 +7,7 @@ This component is using the [SnapCall widget API](https://doc.snapcall.io/#widge
 ## Installation
 
 ```
-npm install @snapcall_/agent-app-react
+npm install @snapcall/agent-app-react
 ```
 
 ## Basic usage

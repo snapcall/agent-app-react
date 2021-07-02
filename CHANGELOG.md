@@ -1,5 +1,14 @@
 # CHANGELOG
 
+## 1.2.0 (July 2, 2021)
+
+- Update npmjs package scope `@snapcall_` -> `@snapcall` ([#117](https://github.com/snapcall/agent-app-react/pull/117))
+- Remove `margin` from the **Video** component ([#112](https://github.com/snapcall/agent-app-react/pull/112))
+- Add a button on the **Video** component to flip the user camera ([#111](https://github.com/snapcall/agent-app-react/pull/111))
+- Improve the default views design ([#110](https://github.com/snapcall/agent-app-react/pull/110))
+- Fix usage of deprecated method `setApiCredentials` ([#108](https://github.com/snapcall/agent-app-react/pull/108))
+- Bump dependencies
+
 ## 1.1.1 (May 7, 2021)
 
 - Update `README.md` ([#88](https://github.com/snapcall/agent-app-react/pull/88))
