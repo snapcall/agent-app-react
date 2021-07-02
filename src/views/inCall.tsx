@@ -1,7 +1,7 @@
 import * as React from 'react';
+import { Button } from '@livechat/design-system';
 import { InCallViewProps } from '../types';
-import secondsToTime from '../helpers/secondsToTime';
-import { Container, ActionButton } from './style';
+import { FlexCard, ButtonsContainer } from './style';
 
 const InCall = ({ hangUp, toggleHold, timer, Video }: InCallViewProps) => {
   const [isOnHold, setIsOnHold] = React.useState(false);
@@ -10,18 +10,17 @@ const InCall = ({ hangUp, toggleHold, timer, Video }: InCallViewProps) => {
     setIsOnHold(current => !current);
   };
   return (
-    <Container>
-      In call ({secondsToTime(timer)})
-      <div style={{ width: '400px' }}>
-        <Video />
-      </div>
-      <div>
-        <ActionButton onClick={onHoldClick}>
+    <FlexCard>
+      <Video timer={timer} />
+      <ButtonsContainer>
+        <Button kind="primary" onClick={onHoldClick}>
           {isOnHold ? 'Resume' : 'Hold'}
-        </ActionButton>
-        <ActionButton onClick={hangUp}>Hang up</ActionButton>
-      </div>
-    </Container>
+        </Button>
+        <Button kind="destructive" onClick={hangUp}>
+          Hang up
+        </Button>
+      </ButtonsContainer>
+    </FlexCard>
   );
 };
 

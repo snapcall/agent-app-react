@@ -1,11 +1,19 @@
 import * as React from 'react';
+import '@livechat/design-system/dist/design-system.css';
+import { Button } from '@livechat/design-system';
 import { WaitingProps } from '../types';
+import Video from '../components/video';
+import Dialpad from '../components/dialpad';
 import secondsToTime from '../helpers/secondsToTime';
-import { Container } from './style';
+import { FlexCard, Separator } from './style';
 
-const Waiting = ({ wrapUpTimeLeft, resetWrapUpTime }: WaitingProps) => {
+const Waiting = ({
+  wrapUpTimeLeft,
+  resetWrapUpTime,
+  startOutboundCall,
+}: WaitingProps) => {
   return (
-    <Container>
+    <FlexCard>
       {wrapUpTimeLeft ? (
         <React.Fragment>
           <span>In wrap up time</span>
@@ -15,9 +23,16 @@ const Waiting = ({ wrapUpTimeLeft, resetWrapUpTime }: WaitingProps) => {
           <button onClick={resetWrapUpTime}>Go online</button>
         </React.Fragment>
       ) : (
-        <p>Ready to receive calls</p>
+        <>
+          <Video hideControls />
+          <Button kind="secondary" style={{ marginTop: '20px' }} disabled>
+            Waiting for a call...
+          </Button>
+          <Separator />
+          <Dialpad startOutboundCall={startOutboundCall} />
+        </>
       )}
-    </Container>
+    </FlexCard>
   );
 };
 

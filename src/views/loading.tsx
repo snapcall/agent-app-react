@@ -1,10 +1,10 @@
 import * as React from 'react';
-import { Container } from './style';
+import { FlexCard, LoadingTextContainer } from './style';
 
 const Loading = () => (
-  <Container>
-    <p>Loading..</p>
-  </Container>
+  <FlexCard>
+    <LoadingTextContainer>Loading..</LoadingTextContainer>
+  </FlexCard>
 );
 
 export default Loading;

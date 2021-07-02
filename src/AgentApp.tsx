@@ -33,7 +33,7 @@ let wrapUpTimeLeftInterval: number | null = null;
 const AgentApp = ({
   apiKey,
   agentEmail,
-  snapcalljsUrl = 'https://cdn.snapcall.io/js/snapcall-latest.min.js',
+  snapcalljsUrl = 'https://cdn.snapcall.io/js/widget-sdk-latest.min.js',
   onDisconnect,
   onReconnect,
   onClientLostConnection,
@@ -102,7 +102,7 @@ const AgentApp = ({
   };
 
   const onInit = () => {
-    window.snapcallAPI.setApiCredentials(apiKey, 'deprecated');
+    window.snapcallAPI.setAPIKey(apiKey);
     window.snapcallAPI.agentLogin(agentEmail);
   };
 

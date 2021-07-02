@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { VideoProps } from '../../types';
 import secondsToTime from '../../helpers/secondsToTime';
 import CameraIcon from './icons/Camera';
+import CameraFlipIcon from './icons/CameraFlip';
 import ScreenShareIcon from './icons/ScreenShare';
 import PictureInPictureIcon from './icons/PictureInPicture';
 import {
@@ -29,6 +30,7 @@ const Video = ({ timer, hideControls }: VideoProps) => {
     false
   );
   const [isIdle, setIsIdle] = React.useState(false);
+  const [displayCameraFlip, setDisplayCameraFlip] = React.useState(false);
 
   const onWebcamClick = React.useCallback(() => {
     if (isShowingWebcam) {
@@ -42,6 +44,10 @@ const Video = ({ timer, hideControls }: VideoProps) => {
       });
     }
   }, [isShowingWebcam]);
+
+  const onWebcamFlipClick = () => {
+    window.snapcallAPI.switchCamera(localWebcamRef.current);
+  };
 
   const onScreenShareClick = React.useCallback(() => {
     if (isScreenSharing) {
@@ -83,7 +89,20 @@ const Video = ({ timer, hideControls }: VideoProps) => {
     setIsIdle(true);
   };
 
+  const checkCamerasList = async () => {
+    try {
+      const camerasList = await window.snapcallAPI.getCamerasList();
+      const shouldDisplayCameraFlip = camerasList.length > 1;
+      setDisplayCameraFlip(shouldDisplayCameraFlip);
+    } catch (getCamerasListError) {
+      console.warn(getCamerasListError);
+      setDisplayCameraFlip(false);
+    }
+  };
+
   React.useEffect(() => {
+    checkCamerasList();
+    window.addEventListener('snapcallEvent_mediaRequest', checkCamerasList);
     window.addEventListener('snapcallEvent_onWebcamStream', onRemoteStream);
     window.addEventListener(
       'snapcallEvent_onScreenSharingStream',
@@ -99,6 +118,10 @@ const Video = ({ timer, hideControls }: VideoProps) => {
     );
     window.snapcallAPI.displayRemoteVideo(remoteVideoRef.current);
     return () => {
+      window.removeEventListener(
+        'snapcallEvent_mediaRequest',
+        checkCamerasList
+      );
       window.removeEventListener(
         'snapcallEvent_onWebcamStream',
         onRemoteStream
@@ -134,16 +157,23 @@ const Video = ({ timer, hideControls }: VideoProps) => {
             <LeftButtonsContainer>
               {!hideControls && (
                 <>
-                  <VideoButton onClick={onWebcamClick}>
-                    <span>
-                      <CameraIcon slash={!isShowingWebcam} />
-                    </span>
-                  </VideoButton>
                   <VideoButton onClick={onScreenShareClick}>
                     <span>
                       <ScreenShareIcon slash={!isScreenSharing} />
                     </span>
                   </VideoButton>
+                  <VideoButton onClick={onWebcamClick}>
+                    <span>
+                      <CameraIcon slash={!isShowingWebcam} />
+                    </span>
+                  </VideoButton>
+                  {displayCameraFlip && isShowingWebcam && (
+                    <VideoButton onClick={onWebcamFlipClick}>
+                      <span>
+                        <CameraFlipIcon />
+                      </span>
+                    </VideoButton>
+                  )}
                 </>
               )}
             </LeftButtonsContainer>

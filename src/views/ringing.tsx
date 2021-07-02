@@ -1,16 +1,17 @@
 import * as React from 'react';
+import { Button } from '@livechat/design-system';
 import { RingingViewProps } from '../types';
-import { Container, ActionButton } from './style';
+import Video from '../components/video';
+import { FlexCard } from './style';
 
-const Ringing = ({ answer, decline }: RingingViewProps) => {
+const Ringing = ({ answer }: RingingViewProps) => {
   return (
-    <Container>
-      A call is coming! (play music)
-      <div>
-        <ActionButton onClick={answer}>Answer</ActionButton>
-        <ActionButton onClick={decline}>Decline</ActionButton>
-      </div>
-    </Container>
+    <FlexCard>
+      <Video hideControls />
+      <Button kind="primary" onClick={answer} style={{ marginTop: '20px' }}>
+        Answer
+      </Button>
+    </FlexCard>
   );
 };
 

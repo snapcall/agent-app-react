@@ -3,9 +3,7 @@ import styled from 'styled-components';
 export const VideoWrapper = styled.div`
   position: relative;
   padding-bottom: 56.25%;
-  margin-bottom: 25px;
   width: 100%;
-  min-width: 320px;
 `;
 
 export const VideoContainer = styled.div<{ idle: boolean }>`
@@ -49,6 +47,7 @@ export const VideoText = styled.p`
   align-items: flex-end;
   flex: 1;
   color: #cccccc;
+  font-weight: bold;
 `;
 
 export const VideoButtonsContainer = styled.div<{ visible: boolean }>`
