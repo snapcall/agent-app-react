@@ -6,6 +6,7 @@ import CameraIcon from './icons/Camera';
 import CameraFlipIcon from './icons/CameraFlip';
 import ScreenShareIcon from './icons/ScreenShare';
 import PictureInPictureIcon from './icons/PictureInPicture';
+import MicrophoneIcon from './icons/Microphone';
 import {
   VideoWrapper,
   VideoContainer,
@@ -31,6 +32,12 @@ const Video = ({ timer, hideControls }: VideoProps) => {
   );
   const [isIdle, setIsIdle] = React.useState(false);
   const [displayCameraFlip, setDisplayCameraFlip] = React.useState(false);
+  const [isMuted, setIsMuted] = React.useState(false);
+
+  const onMicrophoneClick = () => {
+    const muted = window.snapcallAPI.toggleMute();
+    setIsMuted(muted);
+  };
 
   const onWebcamClick = React.useCallback(() => {
     if (isShowingWebcam) {
@@ -160,6 +167,11 @@ const Video = ({ timer, hideControls }: VideoProps) => {
                   <VideoButton onClick={onScreenShareClick}>
                     <span>
                       <ScreenShareIcon slash={!isScreenSharing} />
+                    </span>
+                  </VideoButton>
+                  <VideoButton onClick={onMicrophoneClick}>
+                    <span>
+                      <MicrophoneIcon slash={isMuted} />
                     </span>
                   </VideoButton>
                   <VideoButton onClick={onWebcamClick}>
