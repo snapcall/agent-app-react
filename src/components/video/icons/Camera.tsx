@@ -6,25 +6,36 @@ const CameraIcon = ({ slash }: { slash: boolean }) => {
     return (
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        width="17.666"
-        height="16.264"
-        viewBox="0 0 17.666 16.264"
+        width="20"
+        height="20"
+        viewBox="0 0 20 20"
       >
-        <g transform="translate(-4142 -1201.765)">
+        <g
+          id="Groupe_2251"
+          data-name="Groupe 2251"
+          transform="translate(-141 -107)"
+        >
+          <rect
+            id="Rectangle_1005"
+            data-name="Rectangle 1005"
+            width="20"
+            height="20"
+            transform="translate(141 107)"
+            fill="none"
+          />
           <path
-            d="M11.776,12.484a1.826,1.826,0,0,1-1.349.6h-7.6A1.824,1.824,0,0,1,1,11.262V5.116a1.826,1.826,0,0,1,1.6-1.81L0,.707.707,0,4,3.293,16.264,15.557l-.707.707Zm.473-2.356L5.415,3.293h5.012a1.826,1.826,0,0,1,1.823,1.823v5.012Z"
-            transform="translate(4142 1201.765)"
+            id="Camera"
+            d="M2.188,11.792A2.2,2.2,0,0,1,0,9.6V2.2A2.2,2.2,0,0,1,2.188,0h9.124A2.184,2.184,0,0,1,13.5,2.2V9.6a2.2,2.2,0,0,1-2.187,2.2Zm15.839-1.381L14.6,8.433V3.338l3.413-1.976a1.119,1.119,0,0,1,.372-.154A1.319,1.319,0,0,1,20,2.481V9.266a1.344,1.344,0,0,1-.175.659,1.315,1.315,0,0,1-1.136.665,1.3,1.3,0,0,1-.66-.181Z"
+            transform="translate(141 111.104)"
             fill="#fff"
           />
-          <g transform="translate(4155.162 1206.031)">
-            <g transform="translate(0 0)">
-              <path
-                d="M344.658,123.877a.929.929,0,0,0-.31.128l-2.844,1.641v4.23l2.863,1.641a1.084,1.084,0,0,0,1.5-.4,1.115,1.115,0,0,0,.146-.547v-5.634A1.1,1.1,0,0,0,344.658,123.877Z"
-                transform="translate(-341.504 -123.847)"
-                fill="#fff"
-              />
-            </g>
-          </g>
+          <path
+            id="Tracé_247"
+            data-name="Tracé 247"
+            d="M0,0H26.958V1.326H0Z"
+            transform="translate(141.938 107) rotate(45)"
+            fill="#d84949"
+          />
         </g>
       </svg>
     );
@@ -32,31 +43,29 @@ const CameraIcon = ({ slash }: { slash: boolean }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="16.666"
-      height="9.792"
-      viewBox="0 0 16.666 9.792"
+      width="20"
+      height="20"
+      viewBox="0 0 20 20"
     >
-      <g transform="translate(-4143 -1183)">
-        <g transform="translate(4143 1183)">
-          <g transform="translate(0 0)">
-            <g transform="translate(0 0)">
-              <path
-                d="M9.427,96.512h-7.6A1.829,1.829,0,0,0,0,98.335v6.145A1.829,1.829,0,0,0,1.823,106.3h7.6a1.829,1.829,0,0,0,1.823-1.823V98.335A1.817,1.817,0,0,0,9.427,96.512Z"
-                transform="translate(0 -96.512)"
-                fill="#fff"
-              />
-            </g>
-          </g>
-          <g transform="translate(12.162 0.973)">
-            <g transform="translate(0 0)">
-              <path
-                d="M344.658,123.877a.929.929,0,0,0-.31.128l-2.844,1.641v4.23l2.863,1.641a1.084,1.084,0,0,0,1.5-.4,1.115,1.115,0,0,0,.146-.547v-5.634A1.1,1.1,0,0,0,344.658,123.877Z"
-                transform="translate(-341.504 -123.847)"
-                fill="#fff"
-              />
-            </g>
-          </g>
-        </g>
+      <g
+        id="Groupe_2250"
+        data-name="Groupe 2250"
+        transform="translate(-115 -107)"
+      >
+        <rect
+          id="Rectangle_1005"
+          data-name="Rectangle 1005"
+          width="20"
+          height="20"
+          transform="translate(115 107)"
+          fill="none"
+        />
+        <path
+          id="Camera"
+          d="M2.188,11.792A2.2,2.2,0,0,1,0,9.6V2.2A2.2,2.2,0,0,1,2.188,0h9.124A2.184,2.184,0,0,1,13.5,2.2V9.6a2.2,2.2,0,0,1-2.187,2.2Zm15.839-1.381L14.6,8.433V3.338l3.413-1.976a1.119,1.119,0,0,1,.372-.154A1.319,1.319,0,0,1,20,2.481V9.266a1.344,1.344,0,0,1-.175.659,1.315,1.315,0,0,1-1.136.665,1.3,1.3,0,0,1-.66-.181Z"
+          transform="translate(115 111.104)"
+          fill="#fff"
+        />
       </g>
     </svg>
   );
