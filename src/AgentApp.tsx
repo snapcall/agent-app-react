@@ -229,6 +229,7 @@ const AgentApp = ({
           setView('loading');
           window.snapcallAPI.outboundCallV2(agentEmail, null, phoneNumber, {});
         }}
+        VideoPreview={() => <Video hideControls />}
       />
     );
   }
