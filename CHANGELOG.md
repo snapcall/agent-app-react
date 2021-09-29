@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## 1.3.0 (September 29, 2021)
+
+- Add a new `VideoPreview` prop in `WaitingView` and `RingingView` ([#147](https://github.com/snapcall/agent-app-react/pull/147))
+- Improve the SVG icons design and optimize their size ([#145](https://github.com/snapcall/agent-app-react/pull/145), [#148](https://github.com/snapcall/agent-app-react/pull/148))
+- Update the **Video** component with a toggle mute button ([#144](https://github.com/snapcall/agent-app-react/pull/144))
+- Bump dependencies
+
 ## 1.2.0 (July 2, 2021)
 
 - Update npmjs package scope `@snapcall_` -> `@snapcall` ([#117](https://github.com/snapcall/agent-app-react/pull/117))
