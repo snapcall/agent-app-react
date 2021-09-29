@@ -39,3 +39,13 @@ export interface InCallViewProps {
   timer: number;
   Video: React.ComponentType<VideoProps>;
 }
+
+declare global {
+  interface Document {
+    pictureInPictureEnabled: boolean;
+  }
+
+  interface HTMLVideoElement {
+    requestPictureInPicture: () => void;
+  }
+}
