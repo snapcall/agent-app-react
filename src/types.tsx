@@ -30,6 +30,7 @@ export interface RingingViewProps {
   answer: () => void;
   decline: () => void;
   callID: string;
+  VideoPreview: React.ComponentType;
 }
 
 export interface InCallViewProps {
