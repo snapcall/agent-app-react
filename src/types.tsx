@@ -23,12 +23,14 @@ export interface WaitingProps {
   resetWrapUpTime: () => void;
   wrapUpTimeLeft: number;
   startOutboundCall: ({ phoneNumber }: { phoneNumber: string }) => void;
+  VideoPreview: React.ComponentType;
 }
 
 export interface RingingViewProps {
   answer: () => void;
   decline: () => void;
   callID: string;
+  VideoPreview: React.ComponentType;
 }
 
 export interface InCallViewProps {

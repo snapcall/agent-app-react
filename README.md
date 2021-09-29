@@ -35,8 +35,8 @@ const App = () => (
 | `onAgentMicrophoneDown` | `?() => void` | Event triggered when the agent microphone is down
 | `onAgentMicrophoneUp` | `?() => void` | Event triggered when the agent microphone is up
 | `loadingView` | `?() => ReactNode` | View used for loading
-| `waitingView` | `?({ resetWrapUpTime: Function, wrapUpTimeLeft: number, startOutboundCall: Function }) => ReactNode` | View used when the agent is waiting for a call (ready)
-| `ringingView` | `?({ answer: Function, decline: Function, callID: string }) => ReactNode` | View used when the agent is receiving a call
+| `waitingView` | `?({ resetWrapUpTime: Function, wrapUpTimeLeft: number, startOutboundCall: Function, VideoPreview: ReactNode }) => ReactNode` | View used when the agent is waiting for a call (ready)
+| `ringingView` | `?({ answer: Function, decline: Function, callID: string, VideoPreview: ReactNode }) => ReactNode` | View used when the agent is receiving a call
 | `inCallView` | `?({ hangUp: Function, toggleHold: Function, timer: number, Video: ReactNode }) => ReactNode` | View used when the agent is in call
 
 ## Waiting view
