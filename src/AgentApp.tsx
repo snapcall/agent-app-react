@@ -1,6 +1,6 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
-import { AgentAppProps, RingingViewProps } from './types';
+import { AgentAppProps } from './types';
 import defaultLoadingView from './views/loading';
 import defaultWaitingView from './views/waiting';
 import defaultRingingView from './views/ringing';
@@ -20,6 +20,12 @@ declare global {
 interface AgentStatus {
   inWrapUpTime: boolean;
   wrapUpTimeLeft: number;
+}
+
+interface RingingDataProps {
+  answer: () => void;
+  decline: () => void;
+  callID: string;
 }
 
 const loadScript = (url: string) => {
@@ -47,7 +53,7 @@ const AgentApp = ({
 }: AgentAppProps) => {
   const [agentID, setAgentID] = React.useState<null | string>(null);
   const [view, setView] = React.useState('loading');
-  const [ringingData, setRingingData] = React.useState<RingingViewProps>({
+  const [ringingData, setRingingData] = React.useState<RingingDataProps>({
     answer: () => {},
     decline: () => {},
     callID: '',
@@ -229,6 +235,7 @@ const AgentApp = ({
           setView('loading');
           window.snapcallAPI.outboundCallV2(agentEmail, null, phoneNumber, {});
         }}
+        VideoPreview={() => <Video hideControls />}
       />
     );
   }
@@ -241,6 +248,7 @@ const AgentApp = ({
         }}
         decline={window.snapcallAPI.endCall}
         callID={ringingData.callID}
+        VideoPreview={() => <Video hideControls />}
       />
     );
   }
