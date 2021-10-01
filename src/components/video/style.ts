@@ -76,6 +76,7 @@ export const VideoButton = styled.button`
   border: none;
   border-radius: 50%;
   color: white;
+  padding: 1px 6px;
 
   span {
     display: flex;
