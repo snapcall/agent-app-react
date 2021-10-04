@@ -8,6 +8,7 @@ export const DialpadButton = styled.button`
   background-color: unset;
   border: none;
   cursor: pointer;
+  padding: 0;
 `;
 
 export const DialpadMenu = styled.div`
