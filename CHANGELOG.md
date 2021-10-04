@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 1.3.1 (October 4, 2021)
+
+- Fix a bug causing the Video icons to be too small on mobile devices ([#154](https://github.com/snapcall/agent-app-react/pull/154))
+- Bump dependencies
+
 ## 1.3.0 (September 29, 2021)
 
 - Add a new `VideoPreview` prop in `WaitingView` and `RingingView` ([#147](https://github.com/snapcall/agent-app-react/pull/147))
