@@ -164,16 +164,16 @@ const Video = ({ timer, hideControls }: VideoProps) => {
         onMouseLeave={onMouseLeave}
         idle={isIdle}
       >
+        <VideoElement visible={isShowingWebcam} main={!isRemoteMainVideo}>
+          <span>You</span>
+          <video ref={localWebcamRef} />
+        </VideoElement>
         <VideoElement
-          ref={localWebcamRef}
-          visible={isShowingWebcam}
-          main={!isRemoteMainVideo}
-        />
-        <VideoElement
-          ref={remoteVideoRef}
           visible={isReceivingRemoteStream}
           main={isRemoteMainVideo}
-        />
+        >
+          <video ref={remoteVideoRef} />
+        </VideoElement>
         <VideoText>Enable video or screen sharing</VideoText>
         <VideoButtonsContainer visible={!isIdle}>
           <FixedContainer>

@@ -23,12 +23,30 @@ export const VideoContainer = styled.div<{ idle: boolean }>`
   cursor: ${props => (props.idle ? 'none' : 'default')};
 `;
 
-export const VideoElement = styled.video<{ visible: boolean; main?: boolean }>`
+export const VideoElement = styled.div<{
+  visible: boolean;
+  main?: boolean;
+}>`
   position: absolute;
   width: inherit;
   height: inherit;
   border-radius: inherit;
   visibility: ${props => (props.visible ? 'visible' : 'hidden')};
+
+  video {
+    width: inherit;
+    height: inherit;
+    border-radius: inherit;
+  }
+
+  span {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    color: white;
+    font-weight: bold;
+    font-size: 10px;
+  }
 
   ${props => {
     if (!props.main) {
