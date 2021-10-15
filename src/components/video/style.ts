@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export const VideoWrapper = styled.div`
   position: relative;
@@ -23,23 +23,25 @@ export const VideoContainer = styled.div<{ idle: boolean }>`
   cursor: ${props => (props.idle ? 'none' : 'default')};
 `;
 
-export const VideoElement = styled.video<{ visible: boolean }>`
+export const VideoElement = styled.video<{ visible: boolean; main?: boolean }>`
   position: absolute;
   width: inherit;
   height: inherit;
   border-radius: inherit;
   visibility: ${props => (props.visible ? 'visible' : 'hidden')};
-`;
 
-export const VideoMirrorElement = styled.video<{ visible: boolean }>`
-  position: absolute;
-  max-width: 100px;
-  max-height: 56px;
-  top: 0;
-  right: 0;
-  border-radius: inherit;
-  z-index: 10;
-  visibility: ${props => (props.visible ? 'visible' : 'hidden')};
+  ${props => {
+    if (!props.main) {
+      return css`
+        max-width: 100px;
+        max-height: 56px;
+        top: 0;
+        right: 0;
+        z-index: 10;
+      `;
+    }
+    return css``;
+  }}
 `;
 
 export const VideoText = styled.p`

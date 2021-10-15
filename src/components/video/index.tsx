@@ -11,7 +11,6 @@ import {
   VideoWrapper,
   VideoContainer,
   VideoElement,
-  VideoMirrorElement,
   VideoText,
   VideoButtonsContainer,
   FixedContainer,
@@ -33,6 +32,7 @@ const Video = ({ timer, hideControls }: VideoProps) => {
   const [isIdle, setIsIdle] = React.useState(false);
   const [displayCameraFlip, setDisplayCameraFlip] = React.useState(false);
   const [isMuted, setIsMuted] = React.useState(false);
+  const [isRemoteMainVideo, setIsRemoteMainVideo] = React.useState(true);
 
   const onMicrophoneClick = () => {
     const muted = window.snapcallAPI.toggleMute();
@@ -69,7 +69,15 @@ const Video = ({ timer, hideControls }: VideoProps) => {
   }, [isScreenSharing]);
 
   const onPictureInPictureClick = () => {
-    remoteVideoRef.current?.requestPictureInPicture();
+    if (isRemoteMainVideo) {
+      remoteVideoRef.current?.requestPictureInPicture();
+    } else {
+      localWebcamRef.current?.requestPictureInPicture();
+    }
+  };
+
+  const onVideoSwapClick = () => {
+    setIsRemoteMainVideo(previousValue => !previousValue);
   };
 
   const onRemoteStream = () => {
@@ -156,8 +164,16 @@ const Video = ({ timer, hideControls }: VideoProps) => {
         onMouseLeave={onMouseLeave}
         idle={isIdle}
       >
-        <VideoMirrorElement ref={localWebcamRef} visible={isShowingWebcam} />
-        <VideoElement ref={remoteVideoRef} visible={isReceivingRemoteStream} />
+        <VideoElement
+          ref={localWebcamRef}
+          visible={isShowingWebcam}
+          main={!isRemoteMainVideo}
+        />
+        <VideoElement
+          ref={remoteVideoRef}
+          visible={isReceivingRemoteStream}
+          main={isRemoteMainVideo}
+        />
         <VideoText>Enable video or screen sharing</VideoText>
         <VideoButtonsContainer visible={!isIdle}>
           <FixedContainer>
@@ -186,6 +202,9 @@ const Video = ({ timer, hideControls }: VideoProps) => {
                       </span>
                     </VideoButton>
                   )}
+                  <VideoButton onClick={onVideoSwapClick}>
+                    <span>1</span>
+                  </VideoButton>
                 </>
               )}
             </LeftButtonsContainer>
