@@ -43,6 +43,8 @@ export interface InCallViewProps {
 declare global {
   interface Document {
     pictureInPictureEnabled: boolean;
+    pictureInPictureElement: Element;
+    exitPictureInPicture: () => void;
   }
 
   interface HTMLVideoElement {
