@@ -7,11 +7,11 @@ import CameraFlipIcon from './icons/CameraFlip';
 import ScreenShareIcon from './icons/ScreenShare';
 import PictureInPictureIcon from './icons/PictureInPicture';
 import MicrophoneIcon from './icons/Microphone';
+import VideoSwapIcon from './icons/VideoSwap';
 import {
   VideoWrapper,
   VideoContainer,
   VideoElement,
-  VideoMirrorElement,
   VideoText,
   VideoButtonsContainer,
   FixedContainer,
@@ -33,6 +33,9 @@ const Video = ({ timer, hideControls }: VideoProps) => {
   const [isIdle, setIsIdle] = React.useState(false);
   const [displayCameraFlip, setDisplayCameraFlip] = React.useState(false);
   const [isMuted, setIsMuted] = React.useState(false);
+  const [isRemoteMainVideo, setIsRemoteMainVideo] = React.useState(true);
+
+  const displayVideoSwap = isShowingWebcam || isReceivingRemoteStream;
 
   const onMicrophoneClick = () => {
     const muted = window.snapcallAPI.toggleMute();
@@ -68,24 +71,42 @@ const Video = ({ timer, hideControls }: VideoProps) => {
     }
   }, [isScreenSharing]);
 
-  const onLeavePictureInPicture = () => {
+  const onLeaveLocalPictureInPicture = () => {
+    window.snapcallAPI.requestLocalVideo(localWebcamRef.current);
+    localWebcamRef.current?.removeEventListener(
+      'leavepictureinpicture',
+      onLeaveLocalPictureInPicture
+    );
+  };
+
+  const onLeaveRemotePictureInPicture = () => {
     window.snapcallAPI.displayRemoteVideo(remoteVideoRef.current);
     remoteVideoRef.current?.removeEventListener(
       'leavepictureinpicture',
-      onLeavePictureInPicture
+      onLeaveRemotePictureInPicture
     );
   };
 
   const onPictureInPictureClick = () => {
     if (document.pictureInPictureElement) {
       document.exitPictureInPicture?.();
-    } else {
+    } else if (isRemoteMainVideo) {
       remoteVideoRef.current?.requestPictureInPicture();
       remoteVideoRef.current?.addEventListener(
         'leavepictureinpicture',
-        onLeavePictureInPicture
+        onLeaveRemotePictureInPicture
+      );
+    } else {
+      localWebcamRef.current?.requestPictureInPicture();
+      localWebcamRef.current?.addEventListener(
+        'leavepictureinpicture',
+        onLeaveLocalPictureInPicture
       );
     }
+  };
+
+  const onVideoSwapClick = () => {
+    setIsRemoteMainVideo(previousValue => !previousValue);
   };
 
   const onRemoteStream = () => {
@@ -172,8 +193,16 @@ const Video = ({ timer, hideControls }: VideoProps) => {
         onMouseLeave={onMouseLeave}
         idle={isIdle}
       >
-        <VideoMirrorElement ref={localWebcamRef} visible={isShowingWebcam} />
-        <VideoElement ref={remoteVideoRef} visible={isReceivingRemoteStream} />
+        <VideoElement visible={isShowingWebcam} main={!isRemoteMainVideo}>
+          <span>You</span>
+          <video ref={localWebcamRef} />
+        </VideoElement>
+        <VideoElement
+          visible={isReceivingRemoteStream}
+          main={isRemoteMainVideo}
+        >
+          <video ref={remoteVideoRef} />
+        </VideoElement>
         <VideoText>Enable video or screen sharing</VideoText>
         <VideoButtonsContainer visible={!isIdle}>
           <FixedContainer>
@@ -199,6 +228,13 @@ const Video = ({ timer, hideControls }: VideoProps) => {
                     <VideoButton onClick={onWebcamFlipClick}>
                       <span>
                         <CameraFlipIcon />
+                      </span>
+                    </VideoButton>
+                  )}
+                  {displayVideoSwap && (
+                    <VideoButton onClick={onVideoSwapClick}>
+                      <span>
+                        <VideoSwapIcon />
                       </span>
                     </VideoButton>
                   )}
