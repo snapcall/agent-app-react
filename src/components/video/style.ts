@@ -98,6 +98,7 @@ export const VideoButton = styled.button`
   border-radius: 50%;
   color: white;
   padding: 1px 6px;
+  cursor: pointer;
 
   span {
     display: flex;
