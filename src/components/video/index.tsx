@@ -71,11 +71,37 @@ const Video = ({ timer, hideControls }: VideoProps) => {
     }
   }, [isScreenSharing]);
 
+  const onLeaveLocalPictureInPicture = () => {
+    window.snapcallAPI.requestLocalVideo(localWebcamRef.current);
+    localWebcamRef.current?.removeEventListener(
+      'leavepictureinpicture',
+      onLeaveLocalPictureInPicture
+    );
+  };
+
+  const onLeaveRemotePictureInPicture = () => {
+    window.snapcallAPI.displayRemoteVideo(remoteVideoRef.current);
+    remoteVideoRef.current?.removeEventListener(
+      'leavepictureinpicture',
+      onLeaveRemotePictureInPicture
+    );
+  };
+
   const onPictureInPictureClick = () => {
-    if (isRemoteMainVideo) {
+    if (document.pictureInPictureElement) {
+      document.exitPictureInPicture?.();
+    } else if (isRemoteMainVideo) {
       remoteVideoRef.current?.requestPictureInPicture();
+      remoteVideoRef.current?.addEventListener(
+        'leavepictureinpicture',
+        onLeaveRemotePictureInPicture
+      );
     } else {
       localWebcamRef.current?.requestPictureInPicture();
+      localWebcamRef.current?.addEventListener(
+        'leavepictureinpicture',
+        onLeaveLocalPictureInPicture
+      );
     }
   };
 
