@@ -41,11 +41,12 @@ export const VideoElement = styled.div<{
 
   span {
     position: absolute;
-    top: 5px;
-    left: 5px;
+    top: 3%;
+    left: 3%;
     color: white;
     font-weight: bold;
     font-size: 10px;
+    text-shadow: 0 1px 2px rgb(0 0 0 / 60%), 0 0 2px rgb(0 0 0 / 30%);
   }
 
   ${props => {
