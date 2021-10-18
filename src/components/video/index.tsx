@@ -35,6 +35,8 @@ const Video = ({ timer, hideControls }: VideoProps) => {
   const [isMuted, setIsMuted] = React.useState(false);
   const [isRemoteMainVideo, setIsRemoteMainVideo] = React.useState(true);
 
+  const displayVideoSwap = isShowingWebcam || isReceivingRemoteStream;
+
   const onMicrophoneClick = () => {
     const muted = window.snapcallAPI.toggleMute();
     setIsMuted(muted);
@@ -203,11 +205,13 @@ const Video = ({ timer, hideControls }: VideoProps) => {
                       </span>
                     </VideoButton>
                   )}
-                  <VideoButton onClick={onVideoSwapClick}>
-                    <span>
-                      <VideoSwapIcon />
-                    </span>
-                  </VideoButton>
+                  {displayVideoSwap && (
+                    <VideoButton onClick={onVideoSwapClick}>
+                      <span>
+                        <VideoSwapIcon />
+                      </span>
+                    </VideoButton>
+                  )}
                 </>
               )}
             </LeftButtonsContainer>
