@@ -7,6 +7,7 @@ import CameraFlipIcon from './icons/CameraFlip';
 import ScreenShareIcon from './icons/ScreenShare';
 import PictureInPictureIcon from './icons/PictureInPicture';
 import MicrophoneIcon from './icons/Microphone';
+import VideoSwapIcon from './icons/VideoSwap';
 import {
   VideoWrapper,
   VideoContainer,
@@ -203,7 +204,9 @@ const Video = ({ timer, hideControls }: VideoProps) => {
                     </VideoButton>
                   )}
                   <VideoButton onClick={onVideoSwapClick}>
-                    <span>1</span>
+                    <span>
+                      <VideoSwapIcon />
+                    </span>
                   </VideoButton>
                 </>
               )}
