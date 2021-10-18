@@ -68,8 +68,24 @@ const Video = ({ timer, hideControls }: VideoProps) => {
     }
   }, [isScreenSharing]);
 
+  const onLeavePictureInPicture = () => {
+    window.snapcallAPI.displayRemoteVideo(remoteVideoRef.current);
+    remoteVideoRef.current?.removeEventListener(
+      'leavepictureinpicture',
+      onLeavePictureInPicture
+    );
+  };
+
   const onPictureInPictureClick = () => {
-    remoteVideoRef.current?.requestPictureInPicture();
+    if (document.pictureInPictureElement) {
+      document.exitPictureInPicture?.();
+    } else {
+      remoteVideoRef.current?.requestPictureInPicture();
+      remoteVideoRef.current?.addEventListener(
+        'leavepictureinpicture',
+        onLeavePictureInPicture
+      );
+    }
   };
 
   const onRemoteStream = () => {
