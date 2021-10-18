@@ -137,3 +137,29 @@ export const TimerContainer = styled.div`
   border-radius: 25px;
   color: white;
 `;
+
+export const VideoTopButtonsContainer = styled.div`
+  position: absolute;
+  clip: rect(0px, 40px, 60px, 0px);
+  left: 0;
+  right: 0;
+  top: 0;
+  margin: 0 auto;
+  width: 30px;
+`;
+
+export const VideoTopButton = styled.button<{ idle: boolean }>`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: ${props => (props.idle ? '-34px' : '13px')};
+  transition: top 0.3s;
+  background-color: rgba(0, 0, 0, 0.25);
+  border: none;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  z-index: 10;
+`;

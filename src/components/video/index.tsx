@@ -19,6 +19,8 @@ import {
   RightButtonsContainer,
   VideoButton,
   TimerContainer,
+  VideoTopButtonsContainer,
+  VideoTopButton,
 } from './style';
 
 const Video = ({ timer, hideControls }: VideoProps) => {
@@ -31,11 +33,15 @@ const Video = ({ timer, hideControls }: VideoProps) => {
     false
   );
   const [isIdle, setIsIdle] = React.useState(false);
+  const [videoHover, setVideoHover] = React.useState(false);
   const [displayCameraFlip, setDisplayCameraFlip] = React.useState(false);
   const [isMuted, setIsMuted] = React.useState(false);
   const [isRemoteMainVideo, setIsRemoteMainVideo] = React.useState(true);
 
   const displayVideoSwap = isShowingWebcam || isReceivingRemoteStream;
+  const displayPictureInPicture =
+    (isShowingWebcam && !isRemoteMainVideo) ||
+    (isReceivingRemoteStream && isRemoteMainVideo);
 
   const onMicrophoneClick = () => {
     const muted = window.snapcallAPI.toggleMute();
@@ -119,6 +125,7 @@ const Video = ({ timer, hideControls }: VideoProps) => {
   };
 
   const onMouseMove = () => {
+    setVideoHover(true);
     if (!isReceivingRemoteStream) return;
     if (videoButtonsTimeout.current) clearTimeout(videoButtonsTimeout.current);
     setIsIdle(false);
@@ -128,6 +135,7 @@ const Video = ({ timer, hideControls }: VideoProps) => {
   };
 
   const onMouseLeave = () => {
+    setVideoHover(false);
     if (!isReceivingRemoteStream) return;
     if (videoButtonsTimeout.current) clearTimeout(videoButtonsTimeout.current);
     setIsIdle(true);
@@ -193,6 +201,16 @@ const Video = ({ timer, hideControls }: VideoProps) => {
         onMouseLeave={onMouseLeave}
         idle={isIdle}
       >
+        <VideoTopButtonsContainer>
+          {displayPictureInPicture && (
+            <VideoTopButton
+              idle={!videoHover}
+              onClick={onPictureInPictureClick}
+            >
+              <PictureInPictureIcon />
+            </VideoTopButton>
+          )}
+        </VideoTopButtonsContainer>
         <VideoElement visible={isShowingWebcam} main={!isRemoteMainVideo}>
           <span>You</span>
           <video ref={localWebcamRef} />
@@ -245,15 +263,6 @@ const Video = ({ timer, hideControls }: VideoProps) => {
               {timer !== null && (
                 <TimerContainer>{secondsToTime(timer || 0)}</TimerContainer>
               )}
-              {isReceivingRemoteStream &&
-                document.pictureInPictureEnabled &&
-                !hideControls && (
-                  <VideoButton onClick={onPictureInPictureClick}>
-                    <span>
-                      <PictureInPictureIcon />
-                    </span>
-                  </VideoButton>
-                )}
             </RightButtonsContainer>
           </FixedContainer>
         </VideoButtonsContainer>
