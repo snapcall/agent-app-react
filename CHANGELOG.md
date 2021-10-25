@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## 1.4.0 (October 25, 2021)
+
+- Move the Picture in Picture button at the top of the video element ([#162](https://github.com/snapcall/agent-app-react/pull/162))
+- Add a button to swap local and remote videos position ([#160](https://github.com/snapcall/agent-app-react/pull/160))
+- Fix remote video pausing after exiting picture in picture ([#161](https://github.com/snapcall/agent-app-react/pull/161))
+- Bump dependencies
+
 ## 1.3.1 (October 4, 2021)
 
 - Fix a bug causing the Video icons to be too small on mobile devices ([#154](https://github.com/snapcall/agent-app-react/pull/154))

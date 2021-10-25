@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export const VideoWrapper = styled.div`
   position: relative;
@@ -23,23 +23,44 @@ export const VideoContainer = styled.div<{ idle: boolean }>`
   cursor: ${props => (props.idle ? 'none' : 'default')};
 `;
 
-export const VideoElement = styled.video<{ visible: boolean }>`
+export const VideoElement = styled.div<{
+  visible: boolean;
+  main?: boolean;
+}>`
   position: absolute;
   width: inherit;
   height: inherit;
   border-radius: inherit;
   visibility: ${props => (props.visible ? 'visible' : 'hidden')};
-`;
 
-export const VideoMirrorElement = styled.video<{ visible: boolean }>`
-  position: absolute;
-  max-width: 100px;
-  max-height: 56px;
-  top: 0;
-  right: 0;
-  border-radius: inherit;
-  z-index: 10;
-  visibility: ${props => (props.visible ? 'visible' : 'hidden')};
+  video {
+    width: inherit;
+    height: inherit;
+    border-radius: inherit;
+  }
+
+  span {
+    position: absolute;
+    top: 3%;
+    left: 3%;
+    color: white;
+    font-weight: bold;
+    font-size: 10px;
+    text-shadow: 0 1px 2px rgb(0 0 0 / 60%), 0 0 2px rgb(0 0 0 / 30%);
+  }
+
+  ${props => {
+    if (!props.main) {
+      return css`
+        max-width: 100px;
+        max-height: 56px;
+        top: 0;
+        right: 0;
+        z-index: 10;
+      `;
+    }
+    return css``;
+  }}
 `;
 
 export const VideoText = styled.p`
@@ -77,6 +98,7 @@ export const VideoButton = styled.button`
   border-radius: 50%;
   color: white;
   padding: 1px 6px;
+  cursor: pointer;
 
   span {
     display: flex;
@@ -115,4 +137,30 @@ export const TimerContainer = styled.div`
   backdrop-filter: blur(5px);
   border-radius: 25px;
   color: white;
+`;
+
+export const VideoTopButtonsContainer = styled.div`
+  position: absolute;
+  clip: rect(0px, 40px, 60px, 0px);
+  left: 0;
+  right: 0;
+  top: 0;
+  margin: 0 auto;
+  width: 30px;
+`;
+
+export const VideoTopButton = styled.button<{ idle: boolean }>`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: ${props => (props.idle ? '-34px' : '13px')};
+  transition: top 0.3s;
+  background-color: rgba(0, 0, 0, 0.25);
+  border: none;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  z-index: 10;
 `;
