@@ -97,17 +97,23 @@ const Video = ({ timer, hideControls }: VideoProps) => {
     if (document.pictureInPictureElement) {
       document.exitPictureInPicture?.();
     } else if (isRemoteMainVideo) {
-      remoteVideoRef.current?.requestPictureInPicture();
-      remoteVideoRef.current?.addEventListener(
-        'leavepictureinpicture',
-        onLeaveRemotePictureInPicture
-      );
+      const remoteVideoReadyState = remoteVideoRef.current?.readyState || 0;
+      if (remoteVideoReadyState >= 1) {
+        remoteVideoRef.current?.requestPictureInPicture();
+        remoteVideoRef.current?.addEventListener(
+          'leavepictureinpicture',
+          onLeaveRemotePictureInPicture
+        );
+      }
     } else {
-      localWebcamRef.current?.requestPictureInPicture();
-      localWebcamRef.current?.addEventListener(
-        'leavepictureinpicture',
-        onLeaveLocalPictureInPicture
-      );
+      const localVideoReadyState = localWebcamRef.current?.readyState || 0;
+      if (localVideoReadyState >= 1) {
+        localWebcamRef.current?.requestPictureInPicture();
+        localWebcamRef.current?.addEventListener(
+          'leavepictureinpicture',
+          onLeaveLocalPictureInPicture
+        );
+      }
     }
   };
 
