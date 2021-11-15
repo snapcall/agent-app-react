@@ -77,22 +77,6 @@ const Video = ({ timer, hideControls }: VideoProps) => {
     }
   }, [isScreenSharing]);
 
-  const onLeaveLocalPictureInPicture = () => {
-    window.snapcallAPI.requestLocalVideo(localWebcamRef.current);
-    localWebcamRef.current?.removeEventListener(
-      'leavepictureinpicture',
-      onLeaveLocalPictureInPicture
-    );
-  };
-
-  const onLeaveRemotePictureInPicture = () => {
-    window.snapcallAPI.displayRemoteVideo(remoteVideoRef.current);
-    remoteVideoRef.current?.removeEventListener(
-      'leavepictureinpicture',
-      onLeaveRemotePictureInPicture
-    );
-  };
-
   const onPictureInPictureClick = () => {
     if (document.pictureInPictureElement) {
       document.exitPictureInPicture?.();
@@ -100,19 +84,11 @@ const Video = ({ timer, hideControls }: VideoProps) => {
       const remoteVideoReadyState = remoteVideoRef.current?.readyState || 0;
       if (remoteVideoReadyState >= 1) {
         remoteVideoRef.current?.requestPictureInPicture();
-        remoteVideoRef.current?.addEventListener(
-          'leavepictureinpicture',
-          onLeaveRemotePictureInPicture
-        );
       }
     } else {
       const localVideoReadyState = localWebcamRef.current?.readyState || 0;
       if (localVideoReadyState >= 1) {
         localWebcamRef.current?.requestPictureInPicture();
-        localWebcamRef.current?.addEventListener(
-          'leavepictureinpicture',
-          onLeaveLocalPictureInPicture
-        );
       }
     }
   };
@@ -128,6 +104,14 @@ const Video = ({ timer, hideControls }: VideoProps) => {
   const onRemoteStreamEnd = () => {
     setIsReceivingRemoteStream(false);
     setIsIdle(false);
+  };
+
+  const onLocalVideoPause = () => {
+    localWebcamRef.current?.play();
+  };
+
+  const onRemoteVideoPause = () => {
+    remoteVideoRef.current?.play();
   };
 
   const onMouseMove = () => {
@@ -174,6 +158,8 @@ const Video = ({ timer, hideControls }: VideoProps) => {
       'snapcallEvent_onScreenSharingStreamStop',
       onRemoteStreamEnd
     );
+    localWebcamRef.current?.addEventListener('pause', onLocalVideoPause);
+    remoteVideoRef.current?.addEventListener('pause', onRemoteVideoPause);
     window.snapcallAPI.displayRemoteVideo(remoteVideoRef.current);
     return () => {
       window.removeEventListener(
