@@ -81,9 +81,15 @@ const Video = ({ timer, hideControls }: VideoProps) => {
     if (document.pictureInPictureElement) {
       document.exitPictureInPicture?.();
     } else if (isRemoteMainVideo) {
-      remoteVideoRef.current?.requestPictureInPicture();
+      const remoteVideoReadyState = remoteVideoRef.current?.readyState || 0;
+      if (remoteVideoReadyState >= 1) {
+        remoteVideoRef.current?.requestPictureInPicture();
+      }
     } else {
-      localWebcamRef.current?.requestPictureInPicture();
+      const localVideoReadyState = localWebcamRef.current?.readyState || 0;
+      if (localVideoReadyState >= 1) {
+        localWebcamRef.current?.requestPictureInPicture();
+      }
     }
   };
 
