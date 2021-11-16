@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## 1.5.0 (November 16, 2021)
+
+- Add a new view `ErrorView`, to handle denied microphone access ([#175](https://github.com/snapcall/agent-app-react/pull/175))
+- Fix a bug when trying to enter Picture in Picture when video is not ready ([#172](https://github.com/snapcall/agent-app-react/pull/172))
+- Cleaner fix for video pausing after exiting Picture in Picture ([#173](https://github.com/snapcall/agent-app-react/pull/173 ))
+- Bump dependencies
+
 ## 1.4.0 (October 25, 2021)
 
 - Move the Picture in Picture button at the top of the video element ([#162](https://github.com/snapcall/agent-app-react/pull/162))
