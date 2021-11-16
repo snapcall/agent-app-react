@@ -5,6 +5,7 @@ import defaultLoadingView from './views/loading';
 import defaultWaitingView from './views/waiting';
 import defaultRingingView from './views/ringing';
 import defaultInCallView from './views/inCall';
+import defaultErrorView from './views/error';
 import Video from './components/video';
 import {
   checkMicrophoneLevel,
@@ -50,6 +51,7 @@ const AgentApp = ({
   waitingView: WaitingView,
   ringingView: RingingView,
   inCallView: InCallView,
+  errorView: ErrorView,
 }: AgentAppProps) => {
   const [agentID, setAgentID] = React.useState<null | string>(null);
   const [view, setView] = React.useState('loading');
@@ -60,6 +62,7 @@ const AgentApp = ({
   });
   const [callTimer, setCallTimer] = React.useState(0);
   const [wrapUpTimeLeft, setWrapUpTimeLeft] = React.useState(0);
+  const [error, setError] = React.useState<null | string>(null);
 
   const updateWrapUpTimeLeft = () => setWrapUpTimeLeft(current => current - 1);
 
@@ -119,6 +122,14 @@ const AgentApp = ({
     }
   };
 
+  const onMediaRequestFailure = (event: CustomEvent) => {
+    const { audio } = event.detail.data;
+    if (audio) {
+      setError('Please make sure to allow access to your microphone');
+      setView('error');
+    }
+  };
+
   const onRinging = (event: CustomEvent) => {
     const { take, refuse, id } = event.detail.data;
     setRingingData({
@@ -170,6 +181,10 @@ const AgentApp = ({
       'snapcallEvent_receiveInfo',
       clientNetworkCheck as EventListener
     );
+    window.addEventListener(
+      'snapcallEvent_mediaRequestFailure',
+      onMediaRequestFailure as EventListener
+    );
     return () => {
       window.removeEventListener('snapcallEvent_init', onInit);
       window.removeEventListener(
@@ -198,6 +213,10 @@ const AgentApp = ({
         'snapcallEvent_receiveInfo',
         clientNetworkCheck as EventListener
       );
+      window.removeEventListener(
+        'snapcallEvent_mediaRequestFailure',
+        onMediaRequestFailure as EventListener
+      );
     };
   }, []);
 
@@ -215,6 +234,7 @@ const AgentApp = ({
   }, [wrapUpTimeLeft]);
 
   if (view === 'loading') return <LoadingView />;
+  if (view === 'error' && error) return <ErrorView error={error} />;
   if (view === 'waiting') {
     return (
       <WaitingView
@@ -276,6 +296,7 @@ AgentApp.defaultProps = {
   waitingView: defaultWaitingView,
   ringingView: defaultRingingView,
   inCallView: defaultInCallView,
+  errorView: defaultErrorView,
 };
 
 AgentApp.propTypes = {
