@@ -12,6 +12,7 @@ export interface AgentAppProps {
   waitingView: React.ComponentType<WaitingProps>;
   ringingView: React.ComponentType<RingingViewProps>;
   inCallView: React.ComponentType<InCallViewProps>;
+  errorView: React.ComponentType<ErrorViewProps>;
 }
 
 export interface VideoProps {
@@ -38,6 +39,10 @@ export interface InCallViewProps {
   toggleHold: () => void;
   timer: number;
   Video: React.ComponentType<VideoProps>;
+}
+
+export interface ErrorViewProps {
+  error: string;
 }
 
 declare global {
