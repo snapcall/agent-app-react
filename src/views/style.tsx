@@ -31,7 +31,7 @@ export const ButtonsContainer = styled.div`
   }
 `;
 
-export const LoadingTextContainer = styled.p`
+export const CenteredTextContainer = styled.p`
   text-align: center;
 `;
 

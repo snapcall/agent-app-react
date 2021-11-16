@@ -1,9 +1,9 @@
 import * as React from 'react';
-import { FlexCard, LoadingTextContainer } from './style';
+import { FlexCard, CenteredTextContainer } from './style';
 
 const Loading = () => (
   <FlexCard>
-    <LoadingTextContainer>Loading..</LoadingTextContainer>
+    <CenteredTextContainer>Loading..</CenteredTextContainer>
   </FlexCard>
 );
 
