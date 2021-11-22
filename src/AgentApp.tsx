@@ -276,7 +276,7 @@ const AgentApp = ({
     return (
       <InCallView
         hangUp={window.snapcallAPI.endCall}
-        toggleHold={window.snapcallAPI.clientHold}
+        toggleHold={window.snapcallAPI.toggleHold}
         timer={callTimer}
         Video={Video}
       />
