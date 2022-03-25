@@ -49,6 +49,6 @@
   "dependencies": {
     "@livechat/design-system": "^0.13.1",
     "prop-types": "^15.7.2",
-    "styled-components": "^5.3.3"
+    "styled-components": "^5.3.5"
   }
 }
