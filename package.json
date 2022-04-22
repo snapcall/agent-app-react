@@ -47,7 +47,7 @@
     "typescript": "^4.4.4"
   },
   "dependencies": {
-    "@livechat/design-system": "^0.13.1",
+    "@livechat/design-system": "^0.13.2",
     "prop-types": "^15.7.2",
     "styled-components": "^5.3.3"
   }
